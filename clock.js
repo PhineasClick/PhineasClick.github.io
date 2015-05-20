@@ -1,15 +1,39 @@
 
 (function(){ 
 
+
+	this.textID = null;
+
 	function getRandomInt(min, max) {
         	return Math.floor(Math.random() * (max - min + 1)) + min;
-    	};
+    };
 
 	this.preload = function(entityID) {
 		
 		print("preload("+entityID.id+")");
 		var properties = Entities.getEntityProperties(entityID);
 		print(JSON.stringify(properties));
+		
+		var position = properties.position;
+		position.z += dimensions.z / 2;
+		var textproperties = {
+			type : "Text",
+			position: { x: properties.position.x,
+        	   	     	y: properties.position.y,
+        	        	z: properties.position.z + (properties.position.z / 2)
+        	},
+    		dimensions: {
+            	    x: properties.dimensions.x,
+               	    y: properties.dimensions.y,
+                	z: 0.0
+        	},
+			text : "Please standby..."
+		};
+		
+		
+		
+		this.textID = Entities.addEntity(textproperties);
+		
 		
 		
 	};
@@ -28,6 +52,7 @@
 
 	this.deletingEntity = function(entityID) {
         	print("bye bye, says " + entityID.id);
+        	Entities.deleteEntity(this.textID);
     	};
 	
 });
