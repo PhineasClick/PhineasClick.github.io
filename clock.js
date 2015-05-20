@@ -11,7 +11,7 @@
 		this.entityID = entityID.id;
 		print("preload("+entityID.id+")");
 		var properties = Entities.getEntityProperties(entityID);
-		print(JSON.stringify(properties);
+		print(JSON.stringify(properties));
 		
 		
 	};
