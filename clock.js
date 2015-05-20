@@ -28,8 +28,8 @@
 
 
 
-	this.deletingEntity(EntityItemID) {
-        print("bye bye, says " + EntityItemID.id);
-    };
+	this.deletingEntity = function(EntityItemID) {
+        	print("bye bye, says " + EntityItemID.id);
+    	};
 	
 }
