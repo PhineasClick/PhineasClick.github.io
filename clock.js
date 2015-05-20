@@ -28,11 +28,9 @@
 			text : "Please standby..."
 		};
 		
-		
+		print("Adding Text Entity...");
 		
 		this.textID = Entities.addEntity(textproperties);
-		
-		
 		
 	};
 
