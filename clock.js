@@ -14,8 +14,6 @@
 		var properties = Entities.getEntityProperties(entityID);
 		print(JSON.stringify(properties));
 		
-		var position = properties.position;
-		position.z += dimensions.z / 2;
 		var textproperties = {
 			type : "Text",
 			position: { x: properties.position.x,
