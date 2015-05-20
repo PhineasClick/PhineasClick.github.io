@@ -17,7 +17,7 @@
 	
 
 	this.clickDownOnEntity = function(entityID, mouseEvent) { 
-        print("clickDownOnEntity()...: " + this.entityID;);
+        print("clickDownOnEntity()...: " + entityID);
         	
         	Entities.editEntity(entityID, { color: { red: getRandomInt(128,255), green: getRandomInt(128,255), blue: getRandomInt(128,255)} });
         
