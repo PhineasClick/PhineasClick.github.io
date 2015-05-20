@@ -32,6 +32,7 @@
 		
 		this.textID = Entities.addEntity(textproperties);
 		
+		print("ID : " + this.textID);
 	};
 
 	
