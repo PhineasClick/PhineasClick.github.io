@@ -23,7 +23,7 @@
     		dimensions: {
             	    x: properties.dimensions.x,
                	    y: properties.dimensions.y,
-                	z: 0.0
+                	z: 0.2
         	},
 			text : "Please standby..."
 		};
