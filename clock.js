@@ -18,7 +18,7 @@
 			type : "Text",
 			position: { x: properties.position.x,
         	   	     	y: properties.position.y,
-        	        	z: properties.position.z + (properties.position.z / 2)
+        	        	z: properties.position.z + (properties.dimensions.z / 2)
         	},
     		dimensions: {
             	    x: properties.dimensions.x,
