@@ -7,7 +7,10 @@
 	function getRandomInt(min, max) {
         	return Math.floor(Math.random() * (max - min + 1)) + min;
     };
-
+	function getTrueID(entityID) {
+        var properties = Entities.getEntityProperties(entityID);
+        return { id: properties.id, creatorTokenID: properties.creatorTokenID, isKnownID: properties.isKnownID };
+    };
 	this.preload = function(entityID) {
 		
 		print("preload("+entityID.id+")");
@@ -17,8 +20,8 @@
 		var textproperties = {
 			type : "Text",
 			position: { x: properties.position.x,
-        	   	     	y: properties.position.y,
-        	        	z: properties.position.z + (properties.dimensions.z / 2)
+        	   	     	y: properties.position.y + 0.5,
+        	        	z: properties.position.z)
         	},
     		dimensions: {
             	    x: properties.dimensions.x,
@@ -32,7 +35,13 @@
 		
 		this.textID = Entities.addEntity(textproperties);
 		
-		print("ID : " + this.textID.id);
+		if (getTrueID(this.textID).isKnownID) {
+			
+			this.textID = getTrueID(this.textID);
+			print("ID : " + this.textID.id);
+			
+		}
+		
 	};
 
 	
