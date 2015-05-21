@@ -21,7 +21,7 @@
 			type : "Text",
 			position: { x: properties.position.x,
         	   	     	y: properties.position.y + 0.5,
-        	        	z: properties.position.z)
+        	        	z: properties.position.z
         	},
     		dimensions: {
             	    x: properties.dimensions.x,
