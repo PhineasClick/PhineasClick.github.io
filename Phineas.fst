@@ -1,7 +1,7 @@
 name = demo
 type = body+head
 scale = 0.1
-filename = https://PhineaClick.github.io/Phineas.fbx?1
+filename = http://phineasclick.github.io/Phineas.fbx?1
 texdir = demo/textures
 joint = jointEyeLeft = EyeLeft
 joint = jointLeftHand = LeftHand
