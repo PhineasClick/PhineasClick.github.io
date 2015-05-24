@@ -1,7 +1,7 @@
 name = demo
 type = body+head
 scale = 0.1
-filename = https://s3.amazonaws.com/hifi-public/cozza13/avatar/chris/avatar.fbx?1234
+filename = https://PhineaClick.github.io/Phineas.fbx?1
 texdir = demo/textures
 joint = jointEyeLeft = EyeLeft
 joint = jointLeftHand = LeftHand
