@@ -1,8 +1,8 @@
-name = demo
+name = Phineas
 type = body+head
 scale = 0.1
-filename = http://phineasclick.github.io/Phineas.fbx?5
-texdir = demo/textures
+filename = http://PhineasClick.github.io/Phineas.fbx?8
+texdir = Phineas.fbm
 joint = jointEyeLeft = EyeLeft
 joint = jointLeftHand = LeftHand
 joint = jointRoot = Hips
@@ -87,52 +87,35 @@ jointIndex = RightHandIndex3 = 51
 jointIndex = LeftHandThumb1 = 24
 jointIndex = LeftHandThumb2 = 25
 jointIndex = LeftHandThumb3 = 26
-bs = BrowsD_L = brow_mid_down_left = 1
-bs = BrowsD_L = brow_mid_down_left = 1
-bs = BrowsD_R = brow_mid_down_right = 1
-bs = BrowsD_R = brow_mid_down_right = 1
-bs = BrowsU_C = brow_mid_up_left = 1
-bs = BrowsU_C = brow_mid_up_right = 1
 bs = BrowsU_C = brow_outer_down_left = 1
 bs = BrowsU_C = brow_outer_down_right = 1
 bs = BrowsU_C = brow_squeeze = 0.86
-bs = BrowsU_C = brow_mid_up_left = 1
-bs = BrowsU_C = brow_mid_up_right = 1
-bs = BrowsU_C = brow_outer_down_left = 1
-bs = BrowsU_C = brow_outer_down_right = 1
+bs = BrowsU_C = brow_mid_up_left = 0.5
+bs = BrowsU_C = brow_mid_up_right = 0.5
+bs = BrowsD_L = brow_mid_down_left = 1
+bs = BrowsD_R = brow_mid_down_right = 1
 bs = BrowsU_L = brow_mid_up_left = 1
 bs = BrowsU_L = brow_outer_up_left = 1
-bs = BrowsU_L = brow_mid_up_left = 1
-bs = BrowsU_L = brow_outer_up_left = 1
-bs = BrowsU_R = brow_mid_up_right = 1
-bs = BrowsU_R = brow_outer_up_right = 1
-bs = BrowsU_R = brow_mid_up_right = 1
-bs = BrowsU_R = brow_outer_up_right = 1
-bs = CheekSquint_L = cheek_squint_left = 1
+bs = BrowsU_R = brow_mid_up_right = 0.5
+bs = BrowsU_R = brow_outer_up_right = 0.5
 bs = CheekSquint_L = cheek_squint_left = 1
 bs = CheekSquint_R = cheek_squint_right = 1
-bs = CheekSquint_R = cheek_squint_right = 1
-bs = ChinLowerRaise = lips_lower_out = 0.52
 bs = ChinLowerRaise = mouth_open = -0.2
 bs = ChinUpperRaise = lips_lower_out = 0.78
 bs = ChinUpperRaise = lips_mid_lower_up_left = 0.51
 bs = ChinUpperRaise = lips_mid_lower_up_right = 0.51
 bs = ChinUpperRaise = lips_part = 1
 bs = ChinUpperRaise = lips_upper_out = 0.31
-bs = ChinUpperRaise = mouth_corner_down_left = 0.26
-bs = ChinUpperRaise = mouth_corner_down_right = 0.26
 bs = EyeSquint_L = cheek_squint_left = 1
 bs = EyeSquint_L = cheek_squint_left = 1
 bs = JawOpen = cheek_narrow_left = 0.41
 bs = JawOpen = cheek_narrow_right = 0.41
 bs = JawOpen = lips_lower_out = 1
-bs = JawOpen = lips_mid_lower_up_left = 1
-bs = JawOpen = lips_mid_lower_up_right = 1
 bs = JawOpen = lips_mid_upper_up_left = 0.55
 bs = JawOpen = lips_mid_upper_up_right = 0.55
 bs = JawOpen = lips_part = 1
 bs = JawOpen = lips_upper_out = 0.41
-bs = JawOpen = mouth_open = 0.63
+bs = JawOpen = mouth_open = 0.7
 bs = JawOpen = mouth_wide_left = -0.3
 bs = JawOpen = mouth_wide_right = -0.3
 bs = LipsFunnel = lips_lower_out = 0.31
@@ -164,23 +147,23 @@ bs = LipsPucker = lips_lower_out = 1
 bs = LipsPucker = lips_upper_out = 1
 bs = LipsPucker = mouth_wide_left = -0.5
 bs = LipsPucker = mouth_wide_right = -0.5
-bs = LipsStretch_L = cheek_balloon_left = 0.5
+bs = LipsStretch_L = cheek_balloon_left = 0.1
 bs = LipsStretch_L = lips_mid_upper_up_left = 0.16
 bs = LipsStretch_L = lips_mid_upper_up_right = 0.16
 bs = LipsStretch_L = mouth_corner_down_left = 0.67
 bs = LipsStretch_L = mouth_down_left = 0.22
-bs = LipsStretch_L = mouth_wide_left = 1
+bs = LipsStretch_L = mouth_wide_left = 0.7
 bs = LipsStretch_L = mouth_wide_right = 0.29
-bs = LipsStretch_R = cheek_balloon_right = 0.5
+bs = LipsStretch_R = cheek_balloon_right = 0.1
 bs = LipsStretch_R = mouth_corner_down_right = 0.67
 bs = LipsStretch_R = mouth_down_right = 0.22
 bs = LipsStretch_R = mouth_wide_left = 0.29
-bs = LipsStretch_R = mouth_wide_right = 1
+bs = LipsStretch_R = mouth_wide_right = 0.7
 bs = LipsTogether = mouth_open = -0.5
 bs = LipsUpperClose = lips_part = -0.5
 bs = LipsUpperClose = lips_upper_in = 1
 bs = LipsUpperUp_L = cheek_balloon_left = 0.3
-bs = LipsUpperUp_L = cheek_up_left = 0.5
+bs = LipsUpperUp_L = cheek_up_left = 0.25
 bs = LipsUpperUp_L = lips_mid_lower_down_left = 0.36
 bs = LipsUpperUp_L = lips_mid_upper_up_left = 1
 bs = LipsUpperUp_L = mouth_corner_down_left = 0.25
@@ -188,7 +171,7 @@ bs = LipsUpperUp_L = mouth_corner_down_right = 0.14
 bs = LipsUpperUp_L = mouth_corner_in_left = 0.71
 bs = LipsUpperUp_L = mouth_wide_left = 0.78
 bs = LipsUpperUp_R = cheek_balloon_right = 0.3
-bs = LipsUpperUp_R = cheek_up_right = 0.5
+bs = LipsUpperUp_R = cheek_up_right = 0.25
 bs = LipsUpperUp_R = lips_mid_upper_up_right = 1
 bs = LipsUpperUp_R = mouth_corner_down_right = 0.13
 bs = LipsUpperUp_R = mouth_corner_in_left = 0.25
@@ -213,27 +196,38 @@ bs = MouthLeft = mouth_corner_up_left = 0.72
 bs = MouthLeft = mouth_down_right = 0.24
 bs = MouthLeft = mouth_open = -0.05
 bs = MouthLeft = mouth_up_left = 0.45
-bs = MouthLeft = mouth_wide_left = 2
+bs = MouthLeft = mouth_wide_left = 1
 bs = MouthLeft = mouth_wide_right = -0.3
-bs = MouthRight = cheek_balloon_right = 1
+bs = MouthRight = cheek_balloon_right = 0.3
 bs = MouthRight = mouth_corner_in_left = -0.2
 bs = MouthRight = mouth_corner_up_right = 0.72
 bs = MouthRight = mouth_down_left = 0.24
 bs = MouthRight = mouth_open = -0.05
 bs = MouthRight = mouth_up_right = 0.45
 bs = MouthRight = mouth_wide_left = -0.3
-bs = MouthRight = mouth_wide_right = 2
-bs = MouthSmile_L = cheek_balloon_left = 0.72
-bs = MouthSmile_L = lips_part = -0.2
-bs = MouthSmile_L = mouth_corner_in_left = 1
-bs = MouthSmile_L = mouth_corner_up_left = 0.77
-bs = MouthSmile_L = mouth_up_left = 0.37
-bs = MouthSmile_L = mouth_wide_left = 2
-bs = MouthSmile_R = cheek_balloon_right = 0.72
-bs = MouthSmile_R = mouth_corner_in_right = 1
-bs = MouthSmile_R = mouth_corner_up_right = 0.77
-bs = MouthSmile_R = mouth_up_right = 0.37
-bs = MouthSmile_R = mouth_wide_right = 2
+bs = MouthRight = mouth_wide_right = 0.3
+bs = MouthSmile_L = cheek_up_left = 0.25
+bs = MouthSmile_L = cheek_balloon_left = 0.5
+bs = MouthSmile_L = lips_lower_in = 0.25
+bs = MouthSmile_L = lips_part = -0.1
+bs = MouthSmile_L = lips_upper_in = 0.25
+bs = MouthSmile_L = mouth_corner_down_left = -0.1
+bs = MouthSmile_L = mouth_corner_up_left = 1
+bs = MouthSmile_L = mouth_down_left = 0.4
+bs = MouthSmile_L = lips_mid_lower_down = -0.5
+bs = MouthSmile_L = mouth_narrow_left = -0.2
+bs = MouthSmile_L = mouth_up_left = -0.325
+bs = MouthSmile_R = cheek_up_right = 0.25
+bs = MouthSmile_R = cheek_balloon_right = 0.5
+bs = MouthSmile_R = lips_lower_in = 0.25
+bs = MouthSmile_R = lips_part = -0.1
+bs = MouthSmile_R = lips_upper_in = 0.25
+bs = MouthSmile_R = lips_mid_lower_down = -0.5
+bs = MouthSmile_R = mouth_corner_down_right = -0.1
+bs = MouthSmile_R = mouth_corner_up_right = 1
+bs = MouthSmile_R = mouth_down_right = 0.4
+bs = MouthSmile_R = mouth_narrow_right = -0.2
+bs = MouthSmile_R = mouth_up_right = -0.325
 bs = Puff = cheek_balloon_left = 1
 bs = Puff = cheek_balloon_right = 1
 bs = Puff = lips_mid_lower_up_left = 0.22
