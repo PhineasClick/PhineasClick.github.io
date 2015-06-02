@@ -8,7 +8,7 @@
 	
 	this.preload = function(entityID) { 
         //create DB i not exist 
-        var resutl = this.queryDB("PUT","entities");
+        var resutl = this.queryDB("PUT","entities","");
     }; 
 
 	this.clickDownOnEntity = function(entityID, mouseEvent) { 
@@ -24,7 +24,9 @@
     }; 
     
     this.queryDB = function(type,parameter,data) {
+    	
     	var URL = "http://127.0.0.1:5984/" + parameter;
+    	
 		print("Start Request");
 		
 		var req = new XMLHttpRequest();
@@ -32,8 +34,8 @@
 
 		req.responseType = "json";
 		req.open(type, URL, false);
-
-		data = data || "";
+		
+		//TODO: Better check data for valid data....
 		
 		print("DEBUG : URL = " + URL);
 		print("DEBUG : data = " + data );
