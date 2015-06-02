@@ -20,7 +20,7 @@
         print("clickReleaseOnEntity()...");
         this.properties = Entities.getEntityProperties(entityID);
         var id = this.properties.id.replace(/[{}]/g, '');
-        this.queryDB("PUT","entities/"+this.properties.id,this.propeties);    
+        this.queryDB("PUT","entities/"+id,this.propeties);    
     }; 
     
     this.queryDB = function(type,parameter,data) {
