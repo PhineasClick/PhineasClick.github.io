@@ -19,14 +19,14 @@
     this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
         print("clickReleaseOnEntity()...");
         this.properties = Entities.getEntityProperties(entityID);
+        var id = this.properties.id.replace(/[{}]/g, '');
         this.queryDB("PUT","entities/"+this.properties.id,this.propeties);    
     }; 
     
     this.queryDB = function(type,parameter,data) {
     	var URL = "http://127.0.0.1:5984/" + parameter;
 		print("Start Request");
-		print("DEBUG : URL = " + URL);
-		print("DEBUG : data = " + data );
+		
 		var req = new XMLHttpRequest();
 		var state = req.readyState;
 
@@ -34,7 +34,10 @@
 		req.open(type, URL, false);
 
 		data = data || "";
-
+		
+		print("DEBUG : URL = " + URL);
+		print("DEBUG : data = " + data );
+		
 		if(type === "PUT") {
 			req.setRequestHeader("Content-type","application/json");
 			req.send(data);
