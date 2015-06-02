@@ -24,7 +24,8 @@
         this.properties = Entities.getEntityProperties(this.entityID);
         
         var id = this.properties.id.replace(/[{}]/g, '');
-        this.queryDB("PUT","entities/"+id,JSON.stringify(this.propeties));    
+        
+        this.queryDB("PUT","entities/"+id,JSON.stringify(this.properties));    
     }; 
     
     this.queryDB = function(type,parameter,data) {
