@@ -18,8 +18,8 @@
 
     this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
         print("clickReleaseOnEntity()...");
-        if (this.entityID === null || !this.entityID.isKnownID) {
-            this.entityID = Entities.identifyEntity(entityID);
+        if (this.entityID === null) {
+            this.entityID = entityID;
         }
         this.properties = Entities.getEntityProperties(this.entityID);
         
