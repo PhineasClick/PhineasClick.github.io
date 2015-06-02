@@ -19,7 +19,7 @@
     this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
         print("clickReleaseOnEntity()...");
         this.properties = Entities.getEntityProperties(entityID);
-        this.queryDB("PUT","entities/"+this.properties.Id,this.propeties);    
+        this.queryDB("PUT","entities/"+this.properties.id,this.propeties);    
     }; 
     
     this.queryDB = function(type,parameter,data) {
@@ -44,9 +44,10 @@
 		print("Request sent");
 		if(req.readyState == req.DONE) {
 
-			print("HttpStatus  : " + req.status);
-			print("ErrorCode   : " + req.errorCode);
-			print("Status Text : " + req.statusText);
+			print("HttpStatus    : " + req.status);
+			print("ErrorCode     : " + req.errorCode);
+			print("Status Text   : " + req.statusText);
+			print("Response Text : " + req.responseText);
 
 			var resp = JSON.parse(req.responseText);
 	
