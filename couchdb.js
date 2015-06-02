@@ -25,6 +25,8 @@
     this.queryDB = function(type,parameter,data) {
     	var URL = "http://127.0.0.1:5984/" + parameter;
 		print("Start Request");
+		print("DEBUG : URL = " + URL);
+		print("DEBUG : data = " + data );
 		var req = new XMLHttpRequest();
 		var state = req.readyState;
 
