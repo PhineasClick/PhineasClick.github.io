@@ -8,16 +8,12 @@
 	
 	this.preload = function(entityID) { 
         //create DB i not exist 
-        var resutl = this.queryDB("PUT","entities","");
+        var result = this.queryDB("PUT","entities","");
+        print("DEBUG : QueryResult : " + result);
     }; 
 
-	this.clickDownOnEntity = function(entityID, mouseEvent) { 
-        print("clickDownOnEntity()...");
-    
-    }; 
 
     this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
-        print("clickReleaseOnEntity()...");
         if (this.entityID === null) {
             this.entityID = entityID;
         }
@@ -32,8 +28,6 @@
     	
     	var URL = "http://127.0.0.1:5984/" + parameter;
     	
-		print("Start Request");
-		
 		var req = new XMLHttpRequest();
 		var state = req.readyState;
 
@@ -41,9 +35,6 @@
 		req.open(type, URL, false);
 		
 		//TODO: Better check data for valid data....
-		
-		print("DEBUG : URL = " + URL);
-		print("DEBUG : data = " + data );
 		
 		if(type === "PUT") {
 			req.setRequestHeader("Content-type","application/json");
@@ -54,17 +45,12 @@
 		print("Request sent");
 		if(req.readyState == req.DONE) {
 
-			print("HttpStatus    : " + req.status);
-			print("ErrorCode     : " + req.errorCode);
-			print("Status Text   : " + req.statusText);
-			print("Response Text : " + req.responseText);
-
 			var resp = JSON.parse(req.responseText);
 	
 			return resp;
 		
 		} else {
-			print("Didn't got ReadyState DONE");
+			print("ERROR: Didn't got ReadyState DONE");
 			return("{status:ERROR}");
 		}
     
