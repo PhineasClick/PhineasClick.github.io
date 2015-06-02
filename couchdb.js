@@ -44,7 +44,8 @@
 		}
 		print("Request sent");
 		if(req.readyState == req.DONE) {
-
+			
+			print("DEBUG : " + req.responseText); 
 			var resp = JSON.parse(req.responseText);
 	
 			return resp;
