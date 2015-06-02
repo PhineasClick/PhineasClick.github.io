@@ -19,7 +19,7 @@
     this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
         print("clickReleaseOnEntity()...");
         this.properties = Entities.getEntityProperties(entityID);
-        this.queryDB("PUT","entities",this.propeties);    
+        this.queryDB("PUT","entities/"+this.properties.Id,this.propeties);    
     }; 
     
     this.queryDB = function(type,parameter,data) {
