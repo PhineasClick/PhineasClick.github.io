@@ -23,7 +23,7 @@
     }; 
     
     this.queryDB = function(type,parameter,data) {
-    	var URL = "http://127.0.0.1:5984/";
+    	var URL = "http://127.0.0.1:5984/" + parameter;
 		print("Start Request");
 		var req = new XMLHttpRequest();
 		var state = req.readyState;
