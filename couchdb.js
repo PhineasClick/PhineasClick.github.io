@@ -4,7 +4,7 @@
 
 (function(){ 
 
-
+	this.entityID = null;
 	
 	this.preload = function(entityID) { 
         //create DB i not exist 
@@ -18,7 +18,11 @@
 
     this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
         print("clickReleaseOnEntity()...");
-        this.properties = Entities.getEntityProperties(entityID);
+        if (this.entityID === null || !this.entityID.isKnownID) {
+            this.entityID = Entities.identifyEntity(entityID);
+        }
+        this.properties = Entities.getEntityProperties(this.entityID);
+        
         var id = this.properties.id.replace(/[{}]/g, '');
         this.queryDB("PUT","entities/"+id,JSON.stringify(this.propeties));    
     }; 
