@@ -35,7 +35,7 @@ Amq = function() {
 	var adapter =  new AmqAdapter();
 
 	if (typeof adapter == 'undefined') {
-		throw 'An org.activemq.AmqAdapter must be declared before the amq.js script file.'
+		throw 'An AmqAdapter must be declared before the amq.js script file.'
 	}
 
 	// The URI of the AjaxServlet.
@@ -220,6 +220,7 @@ Amq = function() {
 	return {
 		// optional clientId can be supplied to allow multiple clients (browser windows) within the same session.
 		init : function(options) {
+			print("AMQ initializing");
 			connectStatusHandler = options.connectStatusHandler || function(connected){};
 			uri = options.uri || '/amq';
 			pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 0;
