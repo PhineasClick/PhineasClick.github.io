@@ -1,5 +1,5 @@
 
-AmqConsumer =  function(){
+(function(){
 
 	Script.include("amq_hifi_adapter.js");
 	Script.include("amq.js");
@@ -23,4 +23,4 @@ AmqConsumer =  function(){
  
   	amq.addListener("C1","topic://HIFI.MS",myHandler.rcvMessage);
   
-}
+})
