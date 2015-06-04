@@ -16,17 +16,19 @@
  * limitations under the License.
  */
 
-// AMQ Ajax Adapter for Dojo 
-// This class provides an adapter interface for the Dojo library to perform
+// AMQ Ajax Adapter for HIFI 
+// This class provides an adapter interface for HIFI to perform
 // some of the library-dependent tasks...namely logging and ajax.
 
 
 
 AmqAdapter =  function() {
 
-	function init(options) {
-		print("Init : " + options);
-	}
+	var that = {};
+
+	// function init(options) {
+// 		print("Init : " + options);
+// 	}
 
 /**
  *  Implement this method to make an AJAX call to the AjaxServlet. An
