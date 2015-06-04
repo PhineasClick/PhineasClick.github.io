@@ -10,6 +10,7 @@
         //create DB i not exist 
         var result = this.queryDB("PUT","entities","");
         print("DEBUG : QueryResult : " + result);
+        //TODO : To work with the result, it need to be JSON.parse first.
     }; 
 
 
@@ -45,10 +46,7 @@
 		print("Request sent");
 		if(req.readyState == req.DONE) {
 			
-			print("DEBUG : " + req.responseText); 
-			var resp = JSON.parse(req.responseText);
-	
-			return resp;
+			return req.responseText;
 		
 		} else {
 			print("ERROR: Didn't got ReadyState DONE");
