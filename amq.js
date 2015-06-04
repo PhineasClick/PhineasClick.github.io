@@ -89,31 +89,31 @@ Amq = function() {
 	function messageHandler(data) {
 		print(data);
 		
-		// var response = data.getElementsByTagName("ajax-response");
-// 		if (response != null && response.length == 1) {
-// 			connectStatusHandler(true);
-// 			var responses = response[0].childNodes;    // <response>
-// 			for (var i = 0; i < responses.length; i++) {
-// 				var responseElement = responses[i];
-// 
-// 				// only process nodes of type element.....
-// 				if (responseElement.nodeType != 1) continue;
-// 
-// 				var id = responseElement.getAttribute('id');
-// 
-// 				var handler = messageHandlers[id];
-// 
-// 				if (logging && handler == null) {
-// 					adapter.log('No handler found to match message with id = ' + id);
-// 					continue;
-// 				}
-// 
-// 				// Loop thru and handle each <message>
-// 				for (var j = 0; j < responseElement.childNodes.length; j++) {
-// 					handler(responseElement.childNodes[j]);
-// 				}
-// 			}
-// 		}
+		var response = data.getElementsByTagName("ajax-response");
+		if (response != null && response.length == 1) {
+			connectStatusHandler(true);
+			var responses = response[0].childNodes;    // <response>
+			for (var i = 0; i < responses.length; i++) {
+				var responseElement = responses[i];
+
+				// only process nodes of type element.....
+				if (responseElement.nodeType != 1) continue;
+
+				var id = responseElement.getAttribute('id');
+
+				var handler = messageHandlers[id];
+
+				if (logging && handler == null) {
+					adapter.log('No handler found to match message with id = ' + id);
+					continue;
+				}
+
+				// Loop thru and handle each <message>
+				for (var j = 0; j < responseElement.childNodes.length; j++) {
+					handler(responseElement.childNodes[j]);
+				}
+			}
+		}
 	}
 
 	function errorHandler(xhr, status, ex) {
