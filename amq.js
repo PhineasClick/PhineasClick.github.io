@@ -27,7 +27,7 @@
 
 Amq = function() {
 
-	print("Initialize AMQ...");
+	var that = {};
 
 	var connectStatusHandler;
 
@@ -219,9 +219,9 @@ Amq = function() {
 		return output;
 	}
 
-	return {
+	
 		// optional clientId can be supplied to allow multiple clients (browser windows) within the same session.
-		init : function(options) {
+	that.init : function(options) {
 			print("AMQ initializing");
 			connectStatusHandler = options.connectStatusHandler || function(connected){};
 			uri = options.uri || '/amq';
@@ -233,13 +233,13 @@ Amq = function() {
 			adapter.init(options);
 			sendPoll();
 			
-		},
+	};
 		    
-		startBatch : function() {
+	that.startBatch : function() {
 			batchInProgress = true;
-		},
+	};
 
-		endBatch : function() {
+	that.endBatch : function() {
 			if (messageQueue.length > 0) {
 				var messagesToSend = [];
 				var messagesToQueue = [];
@@ -271,13 +271,13 @@ Amq = function() {
 			} else {
 				batchInProgress = false;
 			}
-		},
+	};
 
 		// Send a JMS message to a destination (eg topic://MY.TOPIC).  Message
 		// should be xml or encoded xml content.
-		sendMessage : function(destination, message) {
+	that.sendMessage : function(destination, message) {
 			sendJmsMessage(destination, message, 'send');
-		},
+	};
 
 		// Listen on a channel or topic.
 		// handler must be a function taking a message argument
@@ -287,24 +287,28 @@ Amq = function() {
 		//            http://activemq.apache.org/selectors.html
 		//
 		// Example: addListener( 'handler', 'topic://test-topic', function(msg) { return msg; }, { selector: "property-name='property-value'" } )
-		addListener : function(id, destination, handler, options) {
+	that.addListener : function(id, destination, handler, options) {
 			messageHandlers[id] = handler;
 			var headers = options && options.selector ? {selector:options.selector} : null;
 			sendJmsMessage(destination, id, 'listen', headers);
-		},
+	};
 
 		// remove Listener from channel or topic.
-		removeListener : function(id, destination) {
+	that.removeListener : function(id, destination) {
 			messageHandlers[id] = null;
 			sendJmsMessage(destination, id, 'unlisten');
-		},
+	};
 		
 		// for unit testing
-		getMessageQueue: function() {
+	that.getMessageQueue: function() {
 			return messageQueue;
-		},
-		testPollHandler: function( data ) {
+	};
+	
+	that.testPollHandler: function( data ) {
 			return pollHandler( data );
 		}
 	};
+	
+	return that;
+	
 };
