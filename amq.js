@@ -27,10 +27,10 @@
 
 Amq = function() {
 
+	print("Initialize AMQ...");
 
 	var connectStatusHandler;
 
-	// Just a shortcut to eliminate some redundant typing.
 	var adapter =  new AmqAdapter();
 
 	if (typeof adapter == 'undefined') {
@@ -77,10 +77,13 @@ Amq = function() {
 	// message, messageType }.
 	var messageQueue = [];
 
-  // String to distinguish this client from others sharing the same session.
-  // This can occur when multiple browser windows or tabs using amq.js simultaneously.
-  // All windows share the same JESSIONID, but need to consume messages independently.
-  var clientId = null;
+  	// String to distinguish this client from others sharing the same session.
+  	// This can occur when multiple browser windows or tabs using amq.js simultaneously.
+  	// All windows share the same JESSIONID, but need to consume messages independently.
+  	var clientId = null;
+  
+  
+  	print("Ready to init...");
   
 	/**
 	 * Iterate over the returned XML and for each message in the response, 

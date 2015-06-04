@@ -7,7 +7,7 @@
 	this.entityID = null;
 	
 	this.preload = function(entityID) { 
-        //create DB i not exist 
+        //create DB if not exist 
         var result = this.queryDB("PUT","entities","");
         print("DEBUG : QueryResult : " + result);
         //TODO : To work with the result, it need to be JSON.parse first.
