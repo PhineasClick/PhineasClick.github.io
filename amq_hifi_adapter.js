@@ -26,9 +26,9 @@ AmqAdapter =  function() {
 
 	var that = {};
 
-	// function init(options) {
-// 		print("Init : " + options);
-// 	}
+	function init(options) {
+ 		print("Init : " + options);
+ 	}
 
 /**
  *  Implement this method to make an AJAX call to the AjaxServlet. An
@@ -49,61 +49,61 @@ AmqAdapter =  function() {
  *             - ex:     The exception that caused the error.
  *  - headers: An object containing additional headers for the ajax request.
  */
-	// that.ajax: function(uri, options) {
-// 		
-// 		var req = new XMLHttpRequest();
-// 		var state = req.readyState;
-// 		
-// 		req.responseType = "xml";
-// 		
-// 		req.setRequestHeader(options.headers);
-// 		
-// 		if (options.method == 'post') {
-// 			req.open(type, uri, false);
-// 			req.send(options.data);
-// 			
-// 		} else {
-// 			if (options.data)
-// 			{
-// 				uri += "?";
-// 				uri += options.data;
-// 			}
-// 			req.open(type, uri, false);
-// 			
-// 			req.send();
-// 			
-// 		}
-// 		
-// 		
-// 		print("Request sent");
-// 		if(req.readyState == req.DONE) {
-// 			
-// 			return req.responseText;
-// 			
-// 			if(typeof options.success === 'function') {
-// 				eval(options.success);
-// 			} else {
-// 				print(options.success);
-// 				print("not a function?");
-// 			}
-// 		
-// 		} else {
-// 			print("ERROR: Didn't got ReadyState DONE");
-// 			if(typeof options.error === 'function') {
-// 				eval(options.error + "(ioargs.xhr,ioargs.xhr.status, ex)");
-// 				
-// 				//maybe better use 'new Function' 
-// 			} else {
-// 				print(options.error);
-// 				print("not a function?");
-// 			}
-// 		}
-// 
-// 	}
-// 
-// 	that.log: function(message, exception) {
-// 		print(message);
-// 	}
+	that.ajax: function(uri, options) {
+		
+		var req = new XMLHttpRequest();
+		var state = req.readyState;
+		
+		req.responseType = "xml";
+		
+		req.setRequestHeader(options.headers);
+		
+		if (options.method == 'post') {
+			req.open(type, uri, false);
+			req.send(options.data);
+			
+		} else {
+			if (options.data)
+			{
+				uri += "?";
+				uri += options.data;
+			}
+			req.open(type, uri, false);
+			
+			req.send();
+			
+		}
+		
+		
+		print("Request sent");
+		if(req.readyState == req.DONE) {
+			
+			return req.responseText;
+			
+			if(typeof options.success === 'function') {
+				eval(options.success);
+			} else {
+				print(options.success);
+				print("not a function?");
+			}
+		
+		} else {
+			print("ERROR: Didn't got ReadyState DONE");
+			if(typeof options.error === 'function') {
+				eval(options.error + "(ioargs.xhr,ioargs.xhr.status, ex)");
+				
+				//maybe better use 'new Function' 
+			} else {
+				print(options.error);
+				print("not a function?");
+			}
+		}
+
+	}
+
+	that.log: function(message, exception) {
+		print(message);
+	}
 
 	return that;
 
