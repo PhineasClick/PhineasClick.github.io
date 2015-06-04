@@ -87,7 +87,7 @@ Amq = function() {
 	 * invoke the handler with the matching id.
 	 */
 	function messageHandler(data) {
-		print(data);
+		
 		
 		var response = data.getElementsByTagName("ajax-response");
 		if (response != null && response.length == 1) {
