@@ -1,8 +1,5 @@
 
-test = function() {
-
+test1 = function() {
 	var that = {};
-
 	return that;
-
 }
