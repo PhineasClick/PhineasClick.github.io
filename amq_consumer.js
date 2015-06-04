@@ -1,24 +1,23 @@
 
-AmqAConsumer =  function(){
+AmqConsumer =  function(){
 
-Script.include("amq.js");
+	Script.include("amq.js");
 
-var amq = new Amq();
+	var amq = new Amq();
 
-  amq.init({ 
-    uri: "http://localhost:61616/", 
-    logging: true,
-    timeout: 20
-  });
+  	amq.init({ 
+    	uri: "http://localhost:61616/", 
+    	logging: true,
+    	timeout: 20
+  	});
   
-  var myHandler = {
-  	rcvMessage: function(message)
-  	{
-     	print("received "+message);
-  	}
-  };
+  	var myHandler = {
+  		rcvMessage: function(message)
+  		{
+     		print("received "+message);
+  		}
+  	};
  
-  amq.addListener("C1","topic://HIFI.MS",myHandler.rcvMessage);
-  
+  	amq.addListener("C1","topic://HIFI.MS",myHandler.rcvMessage);
   
 }
