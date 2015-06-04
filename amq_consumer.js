@@ -1,5 +1,5 @@
 
-AmqAConsumer =  function{
+AmqAConsumer =  function(){
 
 Script.include("amq.js");
 

@@ -22,7 +22,7 @@
 
 
 
-AmqAdapter =  function{
+AmqAdapter =  function() {
 
 	function init(options) {
 	}
