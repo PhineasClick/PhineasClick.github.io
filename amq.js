@@ -82,39 +82,38 @@ Amq = function() {
   	// All windows share the same JESSIONID, but need to consume messages independently.
   	var clientId = null;
   
-  
-  	print("Ready to init...");
-  
 	/**
 	 * Iterate over the returned XML and for each message in the response, 
 	 * invoke the handler with the matching id.
 	 */
 	function messageHandler(data) {
-		var response = data.getElementsByTagName("ajax-response");
-		if (response != null && response.length == 1) {
-			connectStatusHandler(true);
-			var responses = response[0].childNodes;    // <response>
-			for (var i = 0; i < responses.length; i++) {
-				var responseElement = responses[i];
-
-				// only process nodes of type element.....
-				if (responseElement.nodeType != 1) continue;
-
-				var id = responseElement.getAttribute('id');
-
-				var handler = messageHandlers[id];
-
-				if (logging && handler == null) {
-					adapter.log('No handler found to match message with id = ' + id);
-					continue;
-				}
-
-				// Loop thru and handle each <message>
-				for (var j = 0; j < responseElement.childNodes.length; j++) {
-					handler(responseElement.childNodes[j]);
-				}
-			}
-		}
+		print(data);
+		
+		// var response = data.getElementsByTagName("ajax-response");
+// 		if (response != null && response.length == 1) {
+// 			connectStatusHandler(true);
+// 			var responses = response[0].childNodes;    // <response>
+// 			for (var i = 0; i < responses.length; i++) {
+// 				var responseElement = responses[i];
+// 
+// 				// only process nodes of type element.....
+// 				if (responseElement.nodeType != 1) continue;
+// 
+// 				var id = responseElement.getAttribute('id');
+// 
+// 				var handler = messageHandlers[id];
+// 
+// 				if (logging && handler == null) {
+// 					adapter.log('No handler found to match message with id = ' + id);
+// 					continue;
+// 				}
+// 
+// 				// Loop thru and handle each <message>
+// 				for (var j = 0; j < responseElement.childNodes.length; j++) {
+// 					handler(responseElement.childNodes[j]);
+// 				}
+// 			}
+// 		}
 	}
 
 	function errorHandler(xhr, status, ex) {
@@ -220,7 +219,7 @@ Amq = function() {
 	}
 
 	
-		// optional clientId can be supplied to allow multiple clients (browser windows) within the same session.
+	// optional clientId can be supplied to allow multiple clients (browser windows) within the same session.
 	that.init : function(options) {
 			print("AMQ initializing");
 			connectStatusHandler = options.connectStatusHandler || function(connected){};
@@ -273,33 +272,33 @@ Amq = function() {
 			}
 	};
 
-		// Send a JMS message to a destination (eg topic://MY.TOPIC).  Message
-		// should be xml or encoded xml content.
+	// Send a JMS message to a destination (eg topic://MY.TOPIC).  Message
+	// should be xml or encoded xml content.
 	that.sendMessage : function(destination, message) {
 			sendJmsMessage(destination, message, 'send');
 	};
 
-		// Listen on a channel or topic.
-		// handler must be a function taking a message argument
-		//
-		// Supported options:
-		//  selector: If supplied, it should be a SQL92 string like "property-name='value'"
-		//            http://activemq.apache.org/selectors.html
-		//
-		// Example: addListener( 'handler', 'topic://test-topic', function(msg) { return msg; }, { selector: "property-name='property-value'" } )
+	// Listen on a channel or topic.
+	// handler must be a function taking a message argument
+	//
+	// Supported options:
+	//  selector: If supplied, it should be a SQL92 string like "property-name='value'"
+	//            http://activemq.apache.org/selectors.html
+	//
+	// Example: addListener( 'handler', 'topic://test-topic', function(msg) { return msg; }, { selector: "property-name='property-value'" } )
 	that.addListener : function(id, destination, handler, options) {
 			messageHandlers[id] = handler;
 			var headers = options && options.selector ? {selector:options.selector} : null;
 			sendJmsMessage(destination, id, 'listen', headers);
 	};
 
-		// remove Listener from channel or topic.
+	// remove Listener from channel or topic.
 	that.removeListener : function(id, destination) {
 			messageHandlers[id] = null;
 			sendJmsMessage(destination, id, 'unlisten');
 	};
 		
-		// for unit testing
+	// for unit testing
 	that.getMessageQueue: function() {
 			return messageQueue;
 	};
