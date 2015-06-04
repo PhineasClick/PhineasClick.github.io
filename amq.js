@@ -29,7 +29,7 @@ Amq = function() {
 
 	print("Initialize AMQ...");
 
-	var connectStatusHandler;
+	//var connectStatusHandler;
 
 	var adapter =  new AmqAdapter();
 
