@@ -9,7 +9,7 @@
 	var amq = new Amq();
 
   	amq.init({ 
-    	uri: "http://localhost:61616/", 
+    	uri: "http://localhost:8161/api", 
     	logging: true,
     	timeout: 20
   	});
