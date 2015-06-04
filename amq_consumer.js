@@ -1,6 +1,7 @@
 
 AmqConsumer =  function(){
 
+	Script.include("amq_hifi_adapter.js");
 	Script.include("amq.js");
 
 	var amq = new Amq();

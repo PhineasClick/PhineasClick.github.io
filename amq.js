@@ -27,7 +27,6 @@
 
 Amq = function() {
 
-	Script.include("amq_hifi_adapter.js");
 
 	var connectStatusHandler;
 
