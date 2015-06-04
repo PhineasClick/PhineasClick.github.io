@@ -32,7 +32,7 @@ Amq = function() {
 	var connectStatusHandler;
 
 	// Just a shortcut to eliminate some redundant typing.
-	var adapter = org.activemq.AmqAdapter;
+	var adapter =  new AmqAdapter();
 
 	if (typeof adapter == 'undefined') {
 		throw 'An org.activemq.AmqAdapter must be declared before the amq.js script file.'

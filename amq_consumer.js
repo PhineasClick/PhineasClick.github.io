@@ -3,7 +3,7 @@ AmqAConsumer =  function(){
 
 Script.include("amq.js");
 
-var amq = Amq;
+var amq = new Amq();
 
   amq.init({ 
     uri: "http://localhost:61616/", 
