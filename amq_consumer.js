@@ -1,7 +1,6 @@
 
 (function(){
 
-	Script.include("amq_hifi_adapter.js");
 	Script.include("amq.js");
 
 	print("Start Consumer ...");
