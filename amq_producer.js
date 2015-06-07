@@ -17,6 +17,7 @@
 		//req.setRequestHeader(options.headers);
 		req.setRequestHeader("Content-type","application/xml");
 		
+		print("DEBUG : " + JSON.stringify(options));
 		print("Sending to " + options.data.destination);
 		
 		if (options.method == 'post') {
