@@ -51,7 +51,7 @@
 			}
 		}
 
-	}
+	};
 	
 	this.buildParams(msgs) {
 		var s = [];
@@ -68,13 +68,13 @@
 			s[s.length] = msgs[i].messageType;
 		}
 		return s.join('');
-	}
+	};
 	
 	this.errorHandler(xhr, status, ex) {
 		this.connectStatusHandler(false);
 		print('Error occurred in ajax call. HTTP result: ' +
 		                         xhr.status + ', status: ' + status);
-	}
+	};
 	
 	this.endBatch() {
 			if (messageQueue.length > 0) {
@@ -127,7 +127,7 @@
 				headers: headers,
 				success: this.endBatch});
 		}
-	}
+	};
 	
 
 	this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
