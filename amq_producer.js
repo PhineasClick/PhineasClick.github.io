@@ -34,6 +34,12 @@
 		print("Request sent");
 		if(req.readyState == req.DONE) {
 			
+			print("HttpStatus  : " + req.status);
+			print("ErrorCode   : " + req.errorCode);
+			print("Status Text : " + req.statusText);
+			print("Response    : " + JSON.parse(req.responseText);
+			
+			
 			if(typeof options.success === 'function') {
 				eval(options.success);
 			} else {
@@ -41,7 +47,7 @@
 				print("not a function?");
 			}
 		
-			return req.responseText;
+			return JSON.parse(req.responseText);
 		
 		} else {
 			print("ERROR: Didn't got ReadyState DONE");
