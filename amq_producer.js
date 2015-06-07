@@ -31,7 +31,7 @@
 			req.send();
 		}
 		
-		print("Request sent");
+		print("Request sent : " + req.readyState);
 		if(req.readyState == req.DONE) {
 			
 			print("HttpStatus  : " + req.status);
