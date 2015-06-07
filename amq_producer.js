@@ -12,10 +12,10 @@
 		var req = new XMLHttpRequest();
 		var state = req.readyState;
 
-		req.responseType = "json";	
+		req.responseType = "xml";	
 			
 		//req.setRequestHeader(options.headers);
-		req.setRequestHeader("Content-type","application/json");
+		req.setRequestHeader("Content-type","application/Xylophon");
 		
 		if (options.method == 'post') {
 			req.open(options.method, uri, false);
