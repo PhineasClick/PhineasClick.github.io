@@ -124,7 +124,7 @@
 		} else {
 			this.batchInProgress = true;
 			this.ajax(this.uri, { method: 'post',
-				data: bthis.uildParams( [message] ) ,
+				data: this.buildParams( [message] ) ,
 				error: this.errorHandler,
 				headers: headers,
 				success: this.endBatch});
