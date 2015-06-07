@@ -37,7 +37,7 @@
 			print("HttpStatus  : " + req.status);
 			print("ErrorCode   : " + req.errorCode);
 			print("Status Text : " + req.statusText);
-			print("Response    : " + JSON.parse(req.responseText);
+			print("Response    : " + JSON.parse(req.responseText));
 			
 			
 			if(typeof options.success === 'function') {
