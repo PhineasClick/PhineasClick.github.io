@@ -12,8 +12,10 @@
 		var req = new XMLHttpRequest();
 		var state = req.readyState;
 
-		req.responseType = "json";		
-		req.setRequestHeader(options.headers);
+		req.responseType = "json";	
+			
+		//req.setRequestHeader(options.headers);
+		req.setRequestHeader("Content-type","application/json");
 		
 		if (options.method == 'post') {
 			req.open(type, uri, false);
