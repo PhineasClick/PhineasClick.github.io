@@ -1,11 +1,11 @@
 (function(){
 
-	var batchInProgress = false;
-	var messageQueue = [];
-	var messageHandlers = {};
-	var connectStatusHandler;
+	this.batchInProgress = false;
+	this.messageQueue = [];
+	this.messageHandlers = {};
+	this.connectStatusHandler;
 	
-	function ajax(uri, options) {
+	this.ajax(uri, options) {
 		
 		var req = new XMLHttpRequest();
 		var state = req.readyState;
@@ -53,7 +53,7 @@
 
 	}
 	
-	function buildParams(msgs) {
+	this.buildParams(msgs) {
 		var s = [];
 		for (var i = 0, c = msgs.length; i < c; i++) {
 			if (i != 0) s[s.length] = '&';
@@ -70,13 +70,13 @@
 		return s.join('');
 	}
 	
-	function errorHandler(xhr, status, ex) {
-		connectStatusHandler(false);
+	this.errorHandler(xhr, status, ex) {
+		this.connectStatusHandler(false);
 		print('Error occurred in ajax call. HTTP result: ' +
 		                         xhr.status + ', status: ' + status);
 	}
 	
-	function endBatch() {
+	this.endBatch() {
 			if (messageQueue.length > 0) {
 				var messagesToSend = [];
 				var messagesToQueue = [];
@@ -87,50 +87,54 @@
 				// AMQ would add the selector to both 'listen' commands.
 				for(i=0;i<messageQueue.length;i++) {
 					// a message with headers should always be sent by itself.	if other messages have been added, send this one later.
-					if ( messageQueue[ i ].headers && messagesToSend.length == 0 ) {
-						messagesToSend[ messagesToSend.length ] = messageQueue[ i ].message;
+					if ( this.messageQueue[ i ].headers && messagesToSend.length == 0 ) {
+						messagesToSend[ messagesToSend.length ] = this.messageQueue[ i ].message;
 						outgoingHeaders = messageQueue[ i ].headers;
-					} else if ( ! messageQueue[ i ].headers && ! outgoingHeaders ) {
-						messagesToSend[ messagesToSend.length ] = messageQueue[ i ].message;
+					} else if ( ! this.messageQueue[ i ].headers && ! outgoingHeaders ) {
+						messagesToSend[ messagesToSend.length ] = this.messageQueue[ i ].message;
 					} else {
-						messagesToQueue[ messagesToQueue.length ] = messageQueue[ i ];
+						messagesToQueue[ messagesToQueue.length ] = this.messageQueue[ i ];
 					}
 				}
-				var body = buildParams(messagesToSend);
-				messageQueue = messagesToQueue;
-				batchInProgress = true;
-				ajax(uri, {
+				var body = this.buildParams(messagesToSend);
+				this.messageQueue = messagesToQueue;
+				this.batchInProgress = true;
+				this.ajax(uri, {
 					method: 'post',
 					headers: outgoingHeaders,
 					data: body,
-					success: endBatch, 
-					error: errorHandler});
+					success: this.endBatch, 
+					error: this.errorHandler});
 			} else {
-				batchInProgress = false;
+				this.batchInProgress = false;
 			}
 	};
 	
-	function sendJmsMessage(destination, message, type, headers) {
+	this.sendJmsMessage(destination, message, type, headers) {
 		var message = {
 			destination: destination,
 			message: message,
 			messageType: type
 		};
 		// Add message to outbound queue
-		if (batchInProgress) {
-			messageQueue[messageQueue.length] = {message:message, headers:headers};
+		if (this.batchInProgress) {
+			this.messageQueue[this.messageQueue.length] = {message:message, headers:headers};
 		} else {
-			batchInProgress = true;
-			ajax(uri, { method: 'post',
-				data: buildParams( [message] ) ,
-				error: errorHandler,
+			this.batchInProgress = true;
+			this.ajax(uri, { method: 'post',
+				data: bthis.uildParams( [message] ) ,
+				error: this.errorHandler,
 				headers: headers,
-				success: endBatch});
+				success: this.endBatch});
 		}
 	}
 	
 
-
+	this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
+        
+        this.sendJmsMessage("topic://HIFI.MS","{test:1}",'send');
+         
+    }; 
 
 
 })
