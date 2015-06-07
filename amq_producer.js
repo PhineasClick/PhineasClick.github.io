@@ -15,10 +15,9 @@
 		req.responseType = "xml";	
 			
 		//req.setRequestHeader(options.headers);
-		req.setRequestHeader("Content-type","application/xml");
+		req.setRequestHeader("Content-type","application/json");
 		
-		print("DEBUG : " + JSON.stringify(options));
-		print("Sending to " + options.data.destination);
+		print("Sending : " + JSON.stringify(options.data));
 		
 		if (options.method == 'post') {
 			req.open(options.method, uri, false);
