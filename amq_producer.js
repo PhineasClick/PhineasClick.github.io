@@ -18,7 +18,7 @@
 		req.setRequestHeader("Content-type","application/json");
 		
 		if (options.method == 'post') {
-			req.open(type, uri, false);
+			req.open(options.method, uri, false);
 			req.send(options.data);
 			
 		} else {
@@ -27,7 +27,7 @@
 				uri += "?";
 				uri += options.data;
 			}
-			req.open(type, uri, false);
+			req.open(options.method, uri, false);
 			req.send();
 		}
 		
