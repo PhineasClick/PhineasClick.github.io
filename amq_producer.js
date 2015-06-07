@@ -4,13 +4,15 @@
 	this.messageQueue = [];
 	this.messageHandlers = {};
 	this.connectStatusHandler;
+	// The URI of the AjaxServlet.
+	this.uri = "http://localhost:8186/api/amq";
 	
 	this.ajax = function(uri, options) {
 		
 		var req = new XMLHttpRequest();
 		var state = req.readyState;
 
-		req.responseType = "xml";		
+		req.responseType = "json";		
 		req.setRequestHeader(options.headers);
 		
 		if (options.method == 'post') {
@@ -99,7 +101,7 @@
 				var body = this.buildParams(messagesToSend);
 				this.messageQueue = messagesToQueue;
 				this.batchInProgress = true;
-				this.ajax(uri, {
+				this.ajax(this.uri, {
 					method: 'post',
 					headers: outgoingHeaders,
 					data: body,
@@ -121,7 +123,7 @@
 			this.messageQueue[this.messageQueue.length] = {message:message, headers:headers};
 		} else {
 			this.batchInProgress = true;
-			this.ajax(uri, { method: 'post',
+			this.ajax(this.uri, { method: 'post',
 				data: bthis.uildParams( [message] ) ,
 				error: this.errorHandler,
 				headers: headers,
