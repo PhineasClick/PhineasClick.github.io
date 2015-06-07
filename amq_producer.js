@@ -5,7 +5,7 @@
 	this.messageHandlers = {};
 	this.connectStatusHandler;
 	
-	this.ajax(uri, options) {
+	this.ajax = function(uri, options) {
 		
 		var req = new XMLHttpRequest();
 		var state = req.readyState;
@@ -53,7 +53,7 @@
 
 	};
 	
-	this.buildParams(msgs) {
+	this.buildParams = function(msgs) {
 		var s = [];
 		for (var i = 0, c = msgs.length; i < c; i++) {
 			if (i != 0) s[s.length] = '&';
@@ -70,13 +70,13 @@
 		return s.join('');
 	};
 	
-	this.errorHandler(xhr, status, ex) {
+	this.errorHandler = function(xhr, status, ex) {
 		this.connectStatusHandler(false);
 		print('Error occurred in ajax call. HTTP result: ' +
 		                         xhr.status + ', status: ' + status);
 	};
 	
-	this.endBatch() {
+	this.endBatch = function() {
 			if (messageQueue.length > 0) {
 				var messagesToSend = [];
 				var messagesToQueue = [];
@@ -110,7 +110,7 @@
 			}
 	};
 	
-	this.sendJmsMessage(destination, message, type, headers) {
+	this.sendJmsMessage = function(destination, message, type, headers) {
 		var message = {
 			destination: destination,
 			message: message,
