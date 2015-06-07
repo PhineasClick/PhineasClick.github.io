@@ -49,7 +49,7 @@
 				print("not a function?");
 			}
 		
-			return JSON.parse(req.responseText);
+			return req.responseText;
 		
 		} else {
 			print("ERROR: Didn't got ReadyState DONE");
