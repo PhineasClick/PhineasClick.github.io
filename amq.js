@@ -58,7 +58,6 @@ AmqAdapter =  function() {
 		var state = req.readyState;
 		
 		req.responseType = "xml";
-		
 		req.setRequestHeader(options.headers);
 		
 		if (options.method == 'post') {
@@ -72,16 +71,12 @@ AmqAdapter =  function() {
 				uri += options.data;
 			}
 			req.open(type, uri, false);
-			
 			req.send();
 			
 		}
 		
-		
 		print("Request sent");
 		if(req.readyState == req.DONE) {
-			
-			return req.responseText;
 			
 			if(typeof options.success === 'function') {
 				eval(options.success);
@@ -89,6 +84,8 @@ AmqAdapter =  function() {
 				print(options.success);
 				print("not a function?");
 			}
+			
+			return req.responseText;
 		
 		} else {
 			print("ERROR: Didn't got ReadyState DONE");
@@ -273,7 +270,7 @@ Amq = function() {
 				data: addClientId( buildParams( [message] ) ),
 				error: errorHandler,
 				headers: headers,
-				success: org.activemq.Amq.endBatch});
+				success: this.endBatch});
 		}
 	}
 
@@ -353,7 +350,7 @@ Amq = function() {
 					method: 'post',
 					headers: outgoingHeaders,
 					data: addClientId( body ),
-					success: org.activemq.Amq.endBatch, 
+					success: this.endBatch, 
 					error: errorHandler});
 			} else {
 				batchInProgress = false;
