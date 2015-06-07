@@ -5,7 +5,7 @@
 	this.messageHandlers = {};
 	this.connectStatusHandler;
 	// The URI of the AjaxServlet.
-	this.uri = "http://localhost:8186/api/amq";
+	this.uri = "http://localhost:8161/api/amq";
 	
 	this.ajax = function(uri, options) {
 		
@@ -37,7 +37,7 @@
 			print("HttpStatus  : " + req.status);
 			print("ErrorCode   : " + req.errorCode);
 			print("Status Text : " + req.statusText);
-			print("Response    : " + JSON.parse(req.responseText));
+			print("Response    : " + req.responseText);
 			
 			
 			if(typeof options.success === 'function') {
