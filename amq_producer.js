@@ -15,7 +15,7 @@
 		req.responseType = "xml";	
 			
 		//req.setRequestHeader(options.headers);
-		req.setRequestHeader("Content-type","application/Xylophon");
+		req.setRequestHeader("Content-type","application/xml");
 		
 		if (options.method == 'post') {
 			req.open(options.method, uri, false);
