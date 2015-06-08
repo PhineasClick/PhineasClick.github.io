@@ -137,7 +137,7 @@
 			data: data,
 			success: successCallback,
 			error: pollErrorHandler};
-		this.ajax(uri, options);
+		this.ajax(this.uri, options);
 	}
 
 	this.addListener = function(id, destination, handler, options) {
