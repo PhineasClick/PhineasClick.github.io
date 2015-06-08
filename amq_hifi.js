@@ -178,7 +178,7 @@
 			print('Exception in the poll handler: ' + data + " : " + e);
 			throw(e);
 		} finally {
-			//TODO : Maybe need to be replaced ny the Script.update Event.
+			//TODO : Maybe need to be replaced by the Script.update Event.
 			setTimeout(sendPoll, pollDelay);
 		}
 	};
@@ -270,7 +270,7 @@
          
     }; 
 	
-	Script.scriptEnding.connect(cleanup);
+	Script.scriptEnding.connect(this.cleanup);
 	Script.update.connect(this.update);
 	
   
