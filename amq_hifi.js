@@ -234,13 +234,7 @@
 	};
 
 	this.update = function(d) {
-		this.elapsed  += d;
-		print("elapsed now : " + this.elapsed);
-		if(this.elapsed == 20) {
-			print("reached : " + this.elapsed);
-			this.elapsed = 0;
-			//do something.....
-		}
+		
 		if(this.waitForPoll > 0) {
 			this.waitForPoll -= d;
 			print("waitForPoll now : " + this.waitForPoll);
