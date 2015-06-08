@@ -15,6 +15,8 @@
 	this.connectStatusHandler;
 	this.pollErrorDelay = 5000;
 	this.elapsed = 0;
+	this.waitForPoll = -1;
+	this.waitForPollError = -1;
 	
 	this.ajax = function(uri, options) {
 		
@@ -168,7 +170,7 @@
 		//Read and format the Data as JSON Object.
 		
 		
-	}
+	};
 	
 	
 	this.pollHandler = function(data) {
@@ -178,8 +180,7 @@
 			print('Exception in the poll handler: ' + data + " : " + e);
 			throw(e);
 		} finally {
-			//TODO : Maybe need to be replaced by the Script.update Event.
-			setTimeout(sendPoll, pollDelay);
+			this.waitForPoll = this.pollDelay;
 		}
 	};
 
@@ -189,7 +190,7 @@
 			this.sessionInitializedCallback();
 		}
 		this.pollHandler(data);
-	}
+	};
 	
 	function pollErrorHandler(xhr, status, ex) {
 		this.connectStatusHandler(false);
@@ -200,8 +201,8 @@
 		}
 		print('Error occurred in poll. HTTP result: ' +
 		                         xhr.status + ', status: ' + status);
-		setTimeout(function() { this.sendPoll(); }, this.pollErrorDelay);
-	}
+		this.waitForPoll = this.pollErrorDelay;
+	};
 	
 	this.sendPoll = function() {
 		// Workaround IE6 bug where it caches the response
@@ -218,7 +219,7 @@
 			success: successCallback,
 			error: pollErrorHandler};
 		this.ajax(this.uri, options);
-	}
+	};
 
 	this.addListener = function(id, destination, handler, options) {
 			this.messageHandlers[id] = handler;
@@ -241,11 +242,19 @@
 			this.elapsed = 0;
 			//do something.....
 		}
-	}
+		if(this.waitForPoll > 0) {
+			this.waitForPoll -= d;
+		} else {
+			if(this.waitForPoll != -1) {
+				print("Trigger Poll...");
+				this.sendPoll();
+			}
+		}
+	};
 
 	this.cleanup = function() {
 		print("Cleaning up...");
-	}
+	};
 
 
 	this.init({ 
@@ -265,9 +274,8 @@
 	this.addListener("HIFI","topic://HIFI.MS",myHandler.rcvMessage);
 
 	this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
-        
-        this.sendJmsMessage("topic://HIFI.MS","{test:1}",'send');
-         
+        print("Clicked.....");
+        this.sendJmsMessage("topic://HIFI.MS","{test:1}",'send');  
     }; 
 	
 	Script.scriptEnding.connect(this.cleanup);
