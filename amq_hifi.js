@@ -237,10 +237,16 @@
 	this.update = function(d) {
 		this.elapsed  += d;
 		if(this.elapsed == 20) {
+			print("reached : " + this.elapsed);
 			this.elapsed = 0;
 			//do something.....
 		}
 	}
+
+	this.cleanup = function() {
+		print("Cleaning up...");
+	}
+
 
 	this.init({ 
     	uri: this.uri, 
@@ -264,6 +270,7 @@
          
     }; 
 	
+	Script.scriptEnding.connect(cleanup);
 	Script.update.connect(this.update);
 	
   
