@@ -4,6 +4,9 @@
 	this.connectStatusHandler;
 	// The URI of the AjaxServlet.
 	this.uri = "http://localhost:8161/api/amq";
+	this.batchInProgress = false;
+	this.messageQueue = [];
+	this.messageHandlers = {};
 	this.pollDelay;
 	this.timeout;
 	this.sessionInitialized = false;
