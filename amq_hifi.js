@@ -259,7 +259,7 @@
          
     }; 
 	
-	Script.update.connect(update);
+	Script.update.connect(this.update);
 	
   
 })
