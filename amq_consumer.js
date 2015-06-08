@@ -9,7 +9,9 @@
 	this.sessionInitialized = false;
 	this.sessionInitializedCallback;
 	this.messageHandlers = {};
-		
+	this.connectStatusHandler;
+	this.pollErrorDelay = 5000;
+	
 	this.ajax = function(uri, options) {
 		
 		var req = new XMLHttpRequest();
@@ -109,6 +111,18 @@
 		this.pollHandler(data);
 	}
 	
+	function pollErrorHandler(xhr, status, ex) {
+		this.connectStatusHandler(false);
+		if (status === 'error' && xhr.status === 0) {
+			print('Server connection dropped.');
+			setTimeout(function() { this.sendPoll(); }, this.pollErrorDelay);
+			return;
+		}
+		print('Error occurred in poll. HTTP result: ' +
+		                         xhr.status + ', status: ' + status);
+		setTimeout(function() { this.sendPoll(); }, this.pollErrorDelay);
+	}
+	
 	this.sendPoll = function() {
 		// Workaround IE6 bug where it caches the response
 		// Generate a unique query string with date and random
@@ -120,7 +134,7 @@
 		var successCallback = this.sessionInitialized ? this.pollHandler : this.initHandler;
 
 		var options = { method: 'GET',
-			data: addClientId( data ),
+			data: data,
 			success: successCallback,
 			error: pollErrorHandler};
 		this.ajax(uri, options);
