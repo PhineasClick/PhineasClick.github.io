@@ -135,7 +135,7 @@
 	};
 
 	// remove Listener from channel or topic.
-	this.removeListener : function(id, destination) {
+	this.removeListener = function(id, destination) {
 			this.messageHandlers[id] = null;
 			//sendJmsMessage(destination, id, 'unlisten');
 	};
