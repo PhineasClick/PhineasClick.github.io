@@ -245,7 +245,7 @@
   		}
 	};
  
-	this.addListener(myId,"topic://HIFI.MS",myHandler.rcvMessage);
+	this.addListener("HIFI","topic://HIFI.MS",myHandler.rcvMessage);
 
 	this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
         
