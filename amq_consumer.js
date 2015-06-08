@@ -8,7 +8,7 @@
 	this.timeout;
 	this.sessionInitialized = false;
 	this.sessionInitializedCallback;
-	
+	this.messageHandlers = {};
 		
 	this.ajax = function(uri, options) {
 		
@@ -123,8 +123,38 @@
 			data: addClientId( data ),
 			success: successCallback,
 			error: pollErrorHandler};
-		adapter.ajax(uri, options);
+		this.ajax(uri, options);
 	}
+
+	this.addListener = function(id, destination, handler, options) {
+			this.messageHandlers[id] = handler;
+			var headers = options && options.selector ? {selector:options.selector} : null;
+			
+			//sendJmsMessage(destination, id, 'listen', headers);
 	
+	};
+
+	// remove Listener from channel or topic.
+	this.removeListener : function(id, destination) {
+			this.messageHandlers[id] = null;
+			//sendJmsMessage(destination, id, 'unlisten');
+	};
+
+
+	this.init({ 
+    	uri: this.uri, 
+    	logging: true,
+    	timeout: 20
+  	});
+	
+	
+	var myHandler = {
+  		rcvMessage: function(message)
+  		{
+     		print("received "+message);
+  		}
+	};
+ 
+	this.addListener(myId,myDestination,myHandler.rcvMessage);
   
 })
