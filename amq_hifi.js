@@ -205,8 +205,6 @@
 	};
 	
 	this.sendPoll = function() {
-		// Workaround IE6 bug where it caches the response
-		// Generate a unique query string with date and random
 		var now = new Date();
 		var timeoutArg = this.sessionInitialized ? timeout : 0.001;
 		var data = 'timeout=' + timeoutArg * 1000
@@ -217,7 +215,7 @@
 		var options = { method: 'GET',
 			data: data,
 			success: successCallback,
-			error: pollErrorHandler};
+			error: this.pollErrorHandler};
 		this.ajax(this.uri, options);
 	};
 
@@ -246,7 +244,8 @@
 			this.waitForPoll -= d;
 		} else {
 			if(this.waitForPoll != -1) {
-				print("Trigger Poll...");
+				print("Trigger Poll... : " + this.waitForPoll);
+				this.waitForPoll = -1;
 				this.sendPoll();
 			}
 		}
