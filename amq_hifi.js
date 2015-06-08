@@ -233,6 +233,9 @@
 			this.sendJmsMessage(destination, id, 'unlisten');
 	};
 
+	this.update = function(d) {
+		print(d);
+	}
 
 	this.init({ 
     	uri: this.uri, 
@@ -256,7 +259,7 @@
          
     }; 
 	
-	
+	Script.update.connect(update);
 	
   
 })
