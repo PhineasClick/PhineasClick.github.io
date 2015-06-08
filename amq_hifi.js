@@ -220,14 +220,14 @@
 			this.messageHandlers[id] = handler;
 			var headers = options && options.selector ? {selector:options.selector} : null;
 			
-			sendJmsMessage(destination, id, 'listen', headers);
+			this.sendJmsMessage(destination, id, 'listen', headers);
 	
 	};
 
 	// remove Listener from channel or topic.
 	this.removeListener = function(id, destination) {
 			this.messageHandlers[id] = null;
-			sendJmsMessage(destination, id, 'unlisten');
+			this.sendJmsMessage(destination, id, 'unlisten');
 	};
 
 
