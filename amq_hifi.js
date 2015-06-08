@@ -14,8 +14,7 @@
 	this.messageHandlers = {};
 	this.connectStatusHandler;
 	this.pollErrorDelay = 5;
-	this.elapsed = 0;
-	this.waitForPoll = -1;
+	this.waitForPoll = -1.0;
 	
 	
 	this.ajax = function(uri, options) {
@@ -82,6 +81,7 @@
 			this.pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 0;
 			this.timeout = typeof options.timeout == 'number' ? options.timeout : 25;
 			this.sessionInitializedCallback = options.sessionInitializedCallback
+			print("Send Poll...");
 			this.sendPoll();
 			
 	};
@@ -196,7 +196,7 @@
 		this.connectStatusHandler(false);
 		if (status === 'error' && xhr.status === 0) {
 			print('Server connection dropped.');
-			setTimeout(function() { this.sendPoll(); }, this.pollErrorDelay);
+			this.waitForPoll = this.pollErrorDelay;
 			return;
 		}
 		print('Error occurred in poll. HTTP result: ' +
@@ -205,6 +205,7 @@
 	};
 	
 	this.sendPoll = function() {
+		print("=======> I'll send a Poll now.....");
 		var now = new Date();
 		var timeoutArg = this.sessionInitialized ? timeout : 0.001;
 		var data = 'timeout=' + timeoutArg * 1000
