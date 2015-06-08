@@ -14,6 +14,7 @@
 	this.messageHandlers = {};
 	this.connectStatusHandler;
 	this.pollErrorDelay = 5000;
+	this.elapsed = 0;
 	
 	this.ajax = function(uri, options) {
 		
@@ -234,7 +235,11 @@
 	};
 
 	this.update = function(d) {
-		print(d);
+		this.elapsed  += d;
+		if(this.elapsed == 20) {
+			this.elapsed = 0;
+			//do something.....
+		}
 	}
 
 	this.init({ 
