@@ -13,10 +13,10 @@
 	this.sessionInitializedCallback;
 	this.messageHandlers = {};
 	this.connectStatusHandler;
-	this.pollErrorDelay = 5000;
+	this.pollErrorDelay = 5;
 	this.elapsed = 0;
 	this.waitForPoll = -1;
-	this.waitForPollError = -1;
+	
 	
 	this.ajax = function(uri, options) {
 		
@@ -258,6 +258,7 @@
 
 	this.init({ 
     	uri: this.uri, 
+    	pollDelay : 20,
     	logging: true,
     	timeout: 20
   	});
