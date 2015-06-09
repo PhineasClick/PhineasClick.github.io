@@ -54,7 +54,7 @@
 			
 			if(typeof options.success === 'function') {
 				print("calling Success callBack : " + options.success);
-				eval(options.success);
+				options.success();
 			} else {
 				print(options.success);
 				print("not a function?");
@@ -66,7 +66,7 @@
 			print("ERROR: Didn't got ReadyState DONE");
 			if(typeof options.error === 'function') {
 				print("calling Error callBack : " + options.error);
-				eval(options.error + "(ioargs.xhr,ioargs.xhr.status, ex)");
+				options.error(ioargs.xhr,ioargs.xhr.status, ex);
 				
 				//maybe better use 'new Function' 
 			} else {
