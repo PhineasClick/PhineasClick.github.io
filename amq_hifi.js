@@ -179,7 +179,7 @@
 			print('Exception in the poll handler: ' + data + " : " + e);
 			throw(e);
 		} finally {
-			this.waitForPoll = this.pollDelay;
+			Script.setTimeout(this.sendPoll, this.pollDelay);
 		}
 	};
 
@@ -196,12 +196,12 @@
 		this.connectStatusHandler(false);
 		if (status === 'error' && xhr.status === 0) {
 			print('Server connection dropped.');
-			this.waitForPoll = this.pollErrorDelay;
+			Script.setTimeout(function() { this.sendPoll(); }, this.pollErrorDelay);
 			return;
 		}
 		print('Error occurred in poll. HTTP result: ' +
 		                         xhr.status + ', status: ' + status);
-		this.waitForPoll = this.pollErrorDelay;
+		Script.setTimeout(function() { this.sendPoll(); }, this.pollErrorDelay);
 	};
 	
 	this.sendPoll = function() {
@@ -232,20 +232,6 @@
 			this.sendJmsMessage(destination, id, 'unlisten');
 	};
 
-	this.update = function(d) {
-		
-		if(this.waitForPoll > 0) {
-			this.waitForPoll -= d;
-			print("waitForPoll now : " + this.waitForPoll);
-		} else {
-			if(this.waitForPoll != -1) {
-				print("Trigger Poll... : " + this.waitForPoll);
-				this.waitForPoll = -1;
-				this.sendPoll();
-			}
-		}
-	};
-
 	this.cleanup = function() {
 		print("Cleaning up...");
 	};
@@ -274,7 +260,7 @@
     }; 
 	
 	Script.scriptEnding.connect(this.cleanup);
-	Script.update.connect(this.update);
+	
 	
   
 })
