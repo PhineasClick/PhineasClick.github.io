@@ -232,7 +232,7 @@
 			this.sendJmsMessage(destination, id, 'unlisten');
 	};
 
-	this.update = function.call(this,d) {
+	this.update = function(d) {
 		print("Update " + d);
 		if(this.waitForPoll > 0) {
 			this.waitForPoll -= d;
