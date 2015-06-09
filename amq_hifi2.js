@@ -205,6 +205,7 @@ amq = function() {
 			this.sessionInitializedCallback = options.sessionInitializedCallback
 			print("Send Poll...");
 			this.sendPoll();
+	};
 
 	that.sendJmsMessage = function(destination, message, type, headers) {
 		var message = {
