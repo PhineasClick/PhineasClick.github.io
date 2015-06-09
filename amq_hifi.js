@@ -189,7 +189,7 @@
 		if(this.sessionInitializedCallback) {
 			this.sessionInitializedCallback();
 		}
-		print("calling : " + this.pollHandler(data));
+		print("Call pollHandler from context " + this);
 		this.pollHandler(data);
 	};
 	
