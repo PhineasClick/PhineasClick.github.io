@@ -245,7 +245,7 @@ amq = function() {
 	};
 	
 	return that;
-});
+};
 
 (function(){
 
