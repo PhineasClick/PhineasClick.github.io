@@ -207,7 +207,7 @@
 	this.sendPoll = function() {
 		print("=======> I'll send a Poll now.....");
 		var now = new Date();
-		var timeoutArg = this.sessionInitialized ? timeout : 0.001;
+		var timeoutArg = this.sessionInitialized ? this.timeout : 0.001;
 		var data = 'timeout=' + timeoutArg * 1000
 				 + '&d=' + now.getTime()
 				 + '&r=' + Math.random();
