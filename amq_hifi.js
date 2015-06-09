@@ -234,8 +234,8 @@
 
 	this.cleanup = function() {
 		print("Cleaning up...");
+		this.removeHandler.call(this,"HIFI");
 	};
-
 
 	this.init({ 
     	uri: this.uri, 
@@ -243,7 +243,6 @@
     	logging: true,
     	timeout: 20
   	});
-	
 	
 	var myHandler = {
   		rcvMessage: function(message)
@@ -255,7 +254,7 @@
 	this.addListener("HIFI","topic://HIFI.MS",myHandler.rcvMessage);
 
 	this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
-        print("Clicked.....");
+        print("Clicked....." + mouseEvent);
         this.sendJmsMessage("topic://HIFI.MS","{test:1}",'send');  
     }; 
 	
