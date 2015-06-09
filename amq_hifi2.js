@@ -1,5 +1,8 @@
 
-(function(){
+amq = function() {
+
+
+	var that = {};
 
 	this.connectStatusHandler;
 	// The URI of the AjaxServlet.
@@ -73,14 +76,7 @@
 
 	};	
 		
-	this.init = function(options) {
-			print("AMQ initializing");
-			this.connectStatusHandler = options.connectStatusHandler || function(connected){};
-			this.pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 0;
-			this.timeout = typeof options.timeout == 'number' ? options.timeout : 25;
-			this.sessionInitializedCallback = options.sessionInitializedCallback
-			print("Send Poll...");
-			this.sendPoll();
+	
 			
 	};
 	
@@ -141,24 +137,7 @@
 			}
 	};
 	
-	this.sendJmsMessage = function(destination, message, type, headers) {
-		var message = {
-			destination: destination,
-			message: message,
-			messageType: type
-		};
-		// Add message to outbound queue
-		if (this.batchInProgress) {
-			this.messageQueue[this.messageQueue.length] = {message:message, headers:headers};
-		} else {
-			this.batchInProgress = true;
-			this.ajax(this.uri, { method: 'post',
-				data: this.buildParams( [message] ) ,
-				error: this.errorHandler,
-				headers: headers,
-				success: this.endBatch});
-		}
-	};
+	
 	
 	this.messageHandler = function(data) {
 		
@@ -220,28 +199,59 @@
 		this.ajax(this.uri, options);
 	};
 
-	this.addListener = function(id, destination, handler, options) {
+	that.init = function(options) {
+			print("AMQ initializing");
+			this.connectStatusHandler = options.connectStatusHandler || function(connected){};
+			this.pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 0;
+			this.timeout = typeof options.timeout == 'number' ? options.timeout : 25;
+			this.sessionInitializedCallback = options.sessionInitializedCallback
+			print("Send Poll...");
+			this.sendPoll();
+
+	that.sendJmsMessage = function(destination, message, type, headers) {
+		var message = {
+			destination: destination,
+			message: message,
+			messageType: type
+		};
+		// Add message to outbound queue
+		if (this.batchInProgress) {
+			this.messageQueue[this.messageQueue.length] = {message:message, headers:headers};
+		} else {
+			this.batchInProgress = true;
+			this.ajax(this.uri, { method: 'post',
+				data: this.buildParams( [message] ) ,
+				error: this.errorHandler,
+				headers: headers,
+				success: this.endBatch});
+		}
+	};
+
+	that.addListener = function(id, destination, handler, options) {
 			this.messageHandlers[id] = handler;
 			var headers = options && options.selector ? {selector:options.selector} : null;
 			this.sendJmsMessage(destination, id, 'listen', headers);
 	};
 
 	// remove Listener from channel or topic.
-	this.removeListener = function(id, destination) {
+	that.removeListener = function(id, destination) {
 			this.messageHandlers[id] = null;
 			this.sendJmsMessage(destination, id, 'unlisten');
 	};
 
-	this.cleanup = function() {
+	that.cleanup = function() {
 		print("Cleaning up...");
 		this.removeHandler.call(this,"HIFI");
 	};
+	
+	return that;
+})
 
+(function(){
 
-
-
-
-	this.init({ 
+	var amq = new amq();
+	
+	amq.init({ 
     	uri: this.uri, 
     	pollDelay : 20,
     	logging: true,
@@ -255,14 +265,14 @@
   		}
 	};
  
-	this.addListener("HIFI","topic://HIFI.MS",myHandler.rcvMessage);
+	amq.addListener("HIFI","topic://HIFI.MS",myHandler.rcvMessage);
 
 	this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
         print("Clicked....." + mouseEvent);
-        this.sendJmsMessage("topic://HIFI.MS","{test:1}",'send');  
+        amq.sendJmsMessage("topic://HIFI.MS","{test:1}",'send');  
     }; 
 	
-	Script.scriptEnding.connect(this.cleanup);
+	Script.scriptEnding.connect(amq.cleanup);
 	
 	
   
