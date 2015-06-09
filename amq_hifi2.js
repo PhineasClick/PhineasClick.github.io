@@ -173,7 +173,7 @@ amq = function() {
 		connectStatusHandler(false);
 		if (status === 'error' && xhr.status === 0) {
 			print('Server connection dropped.');
-			Script.setTimeout(function() { sendPoll(); }, pollErrorDelay();
+			Script.setTimeout(function() { sendPoll(); }, pollErrorDelay);
 			return;
 		}
 		print('Error occurred in poll. HTTP result: ' +
