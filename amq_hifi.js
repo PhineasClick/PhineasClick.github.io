@@ -15,9 +15,7 @@
 	this.connectStatusHandler;
 	this.pollErrorDelay = 5;
 	this.waitForPoll = -1.0;
-	
-	this.pollHandler = null;
-	
+
 	
 	this.ajax = function(uri, options) {
 		
@@ -55,7 +53,7 @@
 			
 			
 			if(typeof options.success === 'function') {
-				options.success();
+				options.success.call();
 			} else {
 				print(options.success);
 				print("not a function?");
