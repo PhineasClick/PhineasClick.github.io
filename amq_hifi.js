@@ -16,6 +16,8 @@
 	this.pollErrorDelay = 5;
 	this.waitForPoll = -1.0;
 	
+	this.pollHandler = null;
+	
 	
 	this.ajax = function(uri, options) {
 		
@@ -189,7 +191,6 @@
 		if(this.sessionInitializedCallback) {
 			this.sessionInitializedCallback();
 		}
-		print("Call pollHandler from context " + this);
 		this.pollHandler(data);
 	};
 	
