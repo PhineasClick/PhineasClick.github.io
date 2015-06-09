@@ -245,7 +245,7 @@ amq = function() {
 	};
 	
 	return that;
-})
+});
 
 (function(){
 
@@ -274,6 +274,4 @@ amq = function() {
 	
 	Script.scriptEnding.connect(amq.cleanup);
 	
-	
-  
-})
+});
