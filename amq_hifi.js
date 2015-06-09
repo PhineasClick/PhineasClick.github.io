@@ -179,7 +179,7 @@
 			print('Exception in the poll handler: ' + data + " : " + e);
 			throw(e);
 		} finally {
-			Script.setTimeout(this.sendPoll, this.pollDelay);
+			Script.setTimeout(this.sendPoll.call(this), this.pollDelay);
 		}
 	};
 
@@ -196,7 +196,7 @@
 		this.connectStatusHandler(false);
 		if (status === 'error' && xhr.status === 0) {
 			print('Server connection dropped.');
-			Script.setTimeout(function() { this.sendPoll(); }, this.pollErrorDelay);
+			Script.setTimeout(function() { this.sendPoll.call(this); }, this.pollErrorDelay);
 			return;
 		}
 		print('Error occurred in poll. HTTP result: ' +
