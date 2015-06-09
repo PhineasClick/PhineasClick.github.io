@@ -174,6 +174,7 @@
 	
 	
 	this.pollHandler = function(data) {
+		print("pollHandler called...");
 		try {
 			this.messageHandler(data);
 		} catch(e) {
@@ -185,6 +186,7 @@
 	};
 
 	this.initHandler = function(data) {
+		print("InitHandler called....");
 		this.sessionInitialized = true;
 		if(this.sessionInitializedCallback) {
 			this.sessionInitializedCallback();
@@ -223,9 +225,7 @@
 	this.addListener = function(id, destination, handler, options) {
 			this.messageHandlers[id] = handler;
 			var headers = options && options.selector ? {selector:options.selector} : null;
-			
 			this.sendJmsMessage(destination, id, 'listen', headers);
-	
 	};
 
 	// remove Listener from channel or topic.
