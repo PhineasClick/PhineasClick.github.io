@@ -6,7 +6,7 @@ amq = function() {
 
 	var connectStatusHandler;
 	// The URI of the AjaxServlet.
-	var uri = "http://localhost:8161/api/amq";
+	var uri;
 	var batchInProgress = false;
 	var messageQueue = [];
 	var messageHandlers = {};
@@ -124,7 +124,7 @@ amq = function() {
 				var body = buildParams(messagesToSend);
 				messageQueue = messagesToQueue;
 				batchInProgress = true;
-				ajax(this.uri, {
+				ajax(uri, {
 					method: 'post',
 					headers: outgoingHeaders,
 					data: body,
@@ -194,17 +194,17 @@ amq = function() {
 			data: data,
 			success: successCallback,
 			error: pollErrorHandler};
-		ajax(this.uri, options);
+		ajax(uri, options);
 	}
 
 	that.init = function(options) {
 			print("AMQ initializing");
-			this.connectStatusHandler = options.connectStatusHandler || function(connected){};
-			this.pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 0;
-			this.timeout = typeof options.timeout == 'number' ? options.timeout : 25;
-			this.sessionInitializedCallback = options.sessionInitializedCallback
+			connectStatusHandler = options.connectStatusHandler || function(connected){};
+			pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 0;
+			timeout = typeof options.timeout == 'number' ? options.timeout : 25;
+			sessionInitializedCallback = options.sessionInitializedCallback
 			print("Send Poll...");
-			this.sendPoll();
+			sendPoll();
 	};
 
 	that.sendJmsMessage = function(destination, message, type, headers) {
@@ -214,33 +214,33 @@ amq = function() {
 			messageType: type
 		};
 		// Add message to outbound queue
-		if (this.batchInProgress) {
-			this.messageQueue[this.messageQueue.length] = {message:message, headers:headers};
+		if (batchInProgress) {
+			messageQueue[this.messageQueue.length] = {message:message, headers:headers};
 		} else {
-			this.batchInProgress = true;
-			this.ajax(this.uri, { method: 'post',
-				data: this.buildParams( [message] ) ,
-				error: this.errorHandler,
+			batchInProgress = true;
+			ajax(uri, { method: 'post',
+				data: buildParams( [message] ) ,
+				error: errorHandler,
 				headers: headers,
-				success: this.endBatch});
+				success: endBatch});
 		}
 	};
 
 	that.addListener = function(id, destination, handler, options) {
-			this.messageHandlers[id] = handler;
+			messageHandlers[id] = handler;
 			var headers = options && options.selector ? {selector:options.selector} : null;
-			this.sendJmsMessage(destination, id, 'listen', headers);
+			sendJmsMessage(destination, id, 'listen', headers);
 	};
 
 	// remove Listener from channel or topic.
 	that.removeListener = function(id, destination) {
-			this.messageHandlers[id] = null;
-			this.sendJmsMessage(destination, id, 'unlisten');
+			messageHandlers[id] = null;
+			sendJmsMessage(destination, id, 'unlisten');
 	};
 
 	that.cleanup = function() {
 		print("Cleaning up...");
-		this.removeHandler.call(this,"HIFI");
+		removeHandler("HIFI");
 	};
 	
 	return that;
@@ -251,7 +251,7 @@ amq = function() {
 	var amq = new amq();
 	
 	amq.init({ 
-    	uri: this.uri, 
+    	uri: "http://localhost:8161/api/amq", 
     	pollDelay : 20,
     	logging: true,
     	timeout: 20
