@@ -4,23 +4,23 @@ amq = function() {
 
 	var that = {};
 
-	this.connectStatusHandler;
+	var connectStatusHandler;
 	// The URI of the AjaxServlet.
-	this.uri = "http://localhost:8161/api/amq";
-	this.batchInProgress = false;
-	this.messageQueue = [];
-	this.messageHandlers = {};
-	this.pollDelay;
-	this.timeout;
-	this.sessionInitialized = false;
-	this.sessionInitializedCallback;
-	this.messageHandlers = {};
-	this.connectStatusHandler;
-	this.pollErrorDelay = 5;
-	this.waitForPoll = -1.0;
+	var uri = "http://localhost:8161/api/amq";
+	var batchInProgress = false;
+	var messageQueue = [];
+	var messageHandlers = {};
+	var pollDelay;
+	var timeout;
+	var sessionInitialized = false;
+	var sessionInitializedCallback;
+	var messageHandlers = {};
+	var connectStatusHandler;
+	var pollErrorDelay = 5;
+	var waitForPoll = -1.0;
 
 	
-	this.ajax = function(uri, options) {
+	function ajax(uri, options) {
 		
 		var req = new XMLHttpRequest();
 		var state = req.readyState;
@@ -56,7 +56,7 @@ amq = function() {
 			
 			
 			if(typeof options.success === 'function') {
-				options.success.call(this,req.responseText);
+				options.success(req.responseText);
 			} else {
 				print(options.success);
 				print("not a function?");
@@ -67,20 +67,18 @@ amq = function() {
 		} else {
 			print("ERROR: Didn't got ReadyState DONE");
 			if(typeof options.error === 'function') {
-				options.error.call(this,ioargs.xhr,ioargs.xhr.status, ex);
+				options.error(ioargs.xhr,ioargs.xhr.status, ex);
 			} else {
 				print(options.error);
 				print("not a function?");
 			}
 		}
 
-	};	
+	}
 		
+
 	
-			
-	};
-	
-	this.buildParams = function(msgs) {
+	function buildParams(msgs) {
 		var s = [];
 		for (var i = 0, c = msgs.length; i < c; i++) {
 			if (i != 0) s[s.length] = '&';
@@ -95,16 +93,16 @@ amq = function() {
 			s[s.length] = msgs[i].messageType;
 		}
 		return s.join('');
-	};
+	}
 	
-	this.errorHandler = function(xhr, status, ex) {
-		this.connectStatusHandler(false);
+	function errorHandler(xhr, status, ex) {
+		connectStatusHandler(false);
 		print('Error occurred in ajax call. HTTP result: ' +
 		                         xhr.status + ', status: ' + status);
-	};
+	}
 	
-	this.endBatch = function() {
-			if (this.messageQueue.length > 0) {
+	function endBatch() {
+			if (messageQueue.length > 0) {
 				var messagesToSend = [];
 				var messagesToQueue = [];
 				var outgoingHeaders = null;
@@ -112,34 +110,34 @@ amq = function() {
 				// we need to ensure that messages which set headers are sent by themselves.
 				// if 2 'listen' messages were sent together, and a 'selector' header were added to one of them,
 				// AMQ would add the selector to both 'listen' commands.
-				for(i=0;i<this.messageQueue.length;i++) {
+				for(i=0;i<messageQueue.length;i++) {
 					// a message with headers should always be sent by itself.	if other messages have been added, send this one later.
-					if ( this.messageQueue[ i ].headers && messagesToSend.length == 0 ) {
-						messagesToSend[ messagesToSend.length ] = this.messageQueue[ i ].message;
+					if ( messageQueue[ i ].headers && messagesToSend.length == 0 ) {
+						messagesToSend[ messagesToSend.length ] = messageQueue[ i ].message;
 						outgoingHeaders = messageQueue[ i ].headers;
-					} else if ( ! this.messageQueue[ i ].headers && ! outgoingHeaders ) {
-						messagesToSend[ messagesToSend.length ] = this.messageQueue[ i ].message;
+					} else if ( ! messageQueue[ i ].headers && ! outgoingHeaders ) {
+						messagesToSend[ messagesToSend.length ] = messageQueue[ i ].message;
 					} else {
-						messagesToQueue[ messagesToQueue.length ] = this.messageQueue[ i ];
+						messagesToQueue[ messagesToQueue.length ] = messageQueue[ i ];
 					}
 				}
-				var body = this.buildParams(messagesToSend);
-				this.messageQueue = messagesToQueue;
-				this.batchInProgress = true;
-				this.ajax(this.uri, {
+				var body = buildParams(messagesToSend);
+				messageQueue = messagesToQueue;
+				batchInProgress = true;
+				ajax(this.uri, {
 					method: 'post',
 					headers: outgoingHeaders,
 					data: body,
-					success: this.endBatch, 
-					error: this.errorHandler});
+					success: endBatch, 
+					error: errorHandler});
 			} else {
-				this.batchInProgress = false;
+				batchInProgress = false;
 			}
-	};
+	}
 	
 	
 	
-	this.messageHandler = function(data) {
+	function messageHandler(data) {
 		
 		
 		print("Received : " + data);
@@ -147,57 +145,57 @@ amq = function() {
 		//Read and format the Data as JSON Object.
 		
 		
-	};
+	}
 	
 	
-	this.pollHandler = function(data) {
+	function pollHandler(data) {
 		print("pollHandler called...");
 		try {
-			this.messageHandler(data);
+			messageHandler(data);
 		} catch(e) {
 			print('Exception in the poll handler: ' + data + " : " + e);
 			throw(e);
 		} finally {
-			Script.setTimeout(this.sendPoll.call(this), this.pollDelay);
+			Script.setTimeout(sendPoll.call(), pollDelay);
 		}
-	};
+	}
 
-	this.initHandler = function(data) {
+	function initHandler(data) {
 		print("InitHandler called....");
-		this.sessionInitialized = true;
-		if(this.sessionInitializedCallback) {
-			this.sessionInitializedCallback();
+		sessionInitialized = true;
+		if(sessionInitializedCallback) {
+			sessionInitializedCallback();
 		}
-		this.pollHandler(data);
-	};
+		pollHandler(data);
+	}
 	
-	this.pollErrorHandler = function(xhr, status, ex) {
-		this.connectStatusHandler(false);
+	function pollErrorHandler(xhr, status, ex) {
+		connectStatusHandler(false);
 		if (status === 'error' && xhr.status === 0) {
 			print('Server connection dropped.');
-			Script.setTimeout(function() { this.sendPoll.call(this); }, this.pollErrorDelay);
+			Script.setTimeout(function() { sendPoll(); }, pollErrorDelay();
 			return;
 		}
 		print('Error occurred in poll. HTTP result: ' +
 		                         xhr.status + ', status: ' + status);
-		Script.setTimeout(function() { this.sendPoll(); }, this.pollErrorDelay);
-	};
+		Script.setTimeout(function() { sendPoll(); }, pollErrorDelay);
+	}
 	
-	this.sendPoll = function() {
+	function sendPoll() {
 		print("=======> I'll send a Poll now.....");
 		var now = new Date();
-		var timeoutArg = this.sessionInitialized ? this.timeout : 0.001;
+		var timeoutArg = sessionInitialized ? timeout : 0.001;
 		var data = 'timeout=' + timeoutArg * 1000
 				 + '&d=' + now.getTime()
 				 + '&r=' + Math.random();
-		var successCallback = this.sessionInitialized ? this.pollHandler : this.initHandler;
+		var successCallback = sessionInitialized ? pollHandler : initHandler;
 
 		var options = { method: 'GET',
 			data: data,
 			success: successCallback,
-			error: this.pollErrorHandler};
-		this.ajax(this.uri, options);
-	};
+			error: pollErrorHandler};
+		ajax(this.uri, options);
+	}
 
 	that.init = function(options) {
 			print("AMQ initializing");
