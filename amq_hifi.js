@@ -192,7 +192,7 @@
 		this.pollHandler(data);
 	};
 	
-	function pollErrorHandler(xhr, status, ex) {
+	this.pollErrorHandler = function(xhr, status, ex) {
 		this.connectStatusHandler(false);
 		if (status === 'error' && xhr.status === 0) {
 			print('Server connection dropped.');
