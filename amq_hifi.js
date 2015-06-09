@@ -53,7 +53,7 @@
 			
 			
 			if(typeof options.success === 'function') {
-				options.success.call();
+				options.success.call(this);
 			} else {
 				print(options.success);
 				print("not a function?");
