@@ -272,4 +272,4 @@ amq = function() {
 	
 	Script.scriptEnding.connect(amq.cleanup);
 	
-});
+})
