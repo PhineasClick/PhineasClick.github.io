@@ -233,7 +233,7 @@
 	};
 
 	this.update = function(d) {
-		print("Update " + d);
+		print("Update " + this.waitForPoll);
 		if(this.waitForPoll > 0) {
 			this.waitForPoll -= d;
 			print("waitForPoll now : " + this.waitForPoll);
