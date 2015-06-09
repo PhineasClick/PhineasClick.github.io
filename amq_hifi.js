@@ -232,8 +232,8 @@
 			this.sendJmsMessage(destination, id, 'unlisten');
 	};
 
-	this.update = function(d) {
-		
+	this.update = function.call(this,d) {
+		print("Update " + d);
 		if(this.waitForPoll > 0) {
 			this.waitForPoll -= d;
 			print("waitForPoll now : " + this.waitForPoll);
