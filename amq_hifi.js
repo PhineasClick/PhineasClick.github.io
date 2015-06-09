@@ -53,7 +53,7 @@
 			
 			
 			if(typeof options.success === 'function') {
-				options.success.call(this);
+				options.success.call(this,req.responseText);
 			} else {
 				print(options.success);
 				print("not a function?");
@@ -64,7 +64,7 @@
 		} else {
 			print("ERROR: Didn't got ReadyState DONE");
 			if(typeof options.error === 'function') {
-				options.error(ioargs.xhr,ioargs.xhr.status, ex);
+				options.error.call(this,ioargs.xhr,ioargs.xhr.status, ex);
 			} else {
 				print(options.error);
 				print("not a function?");
@@ -189,7 +189,7 @@
 		if(this.sessionInitializedCallback) {
 			this.sessionInitializedCallback();
 		}
-		this.pollHandler(data);
+		this.pollHandler.call(this,data);
 	};
 	
 	this.pollErrorHandler = function(xhr, status, ex) {
