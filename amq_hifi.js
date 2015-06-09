@@ -108,7 +108,7 @@
 	};
 	
 	this.endBatch = function() {
-			if (messageQueue.length > 0) {
+			if (this.messageQueue.length > 0) {
 				var messagesToSend = [];
 				var messagesToQueue = [];
 				var outgoingHeaders = null;
@@ -116,7 +116,7 @@
 				// we need to ensure that messages which set headers are sent by themselves.
 				// if 2 'listen' messages were sent together, and a 'selector' header were added to one of them,
 				// AMQ would add the selector to both 'listen' commands.
-				for(i=0;i<messageQueue.length;i++) {
+				for(i=0;i<this.messageQueue.length;i++) {
 					// a message with headers should always be sent by itself.	if other messages have been added, send this one later.
 					if ( this.messageQueue[ i ].headers && messagesToSend.length == 0 ) {
 						messagesToSend[ messagesToSend.length ] = this.messageQueue[ i ].message;
@@ -189,7 +189,7 @@
 		if(this.sessionInitializedCallback) {
 			this.sessionInitializedCallback();
 		}
-		this.pollHandler.call(this,data);
+		this.pollHandler(data);
 	};
 	
 	this.pollErrorHandler = function(xhr, status, ex) {
