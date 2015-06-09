@@ -189,6 +189,7 @@
 		if(this.sessionInitializedCallback) {
 			this.sessionInitializedCallback();
 		}
+		print("calling : " + this.pollhander(data));
 		this.pollHandler(data);
 	};
 	
@@ -262,7 +263,7 @@
 	var myHandler = {
   		rcvMessage: function(message)
   		{
-     		print("received "+message);
+     		print("received " + message);
   		}
 	};
  
