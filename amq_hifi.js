@@ -274,7 +274,9 @@
     }; 
 	
 	Script.scriptEnding.connect(this.cleanup);
-	Script.update.connect(function(deltaTime) { this.update.call(this,deltaTime)});
+	Script.update.connect(function(deltaTime) { 
+		this.update.call(this,deltaTime);
+	});
 	
   
 })
