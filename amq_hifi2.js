@@ -248,7 +248,7 @@ amq = function() {
 
 (function(){
 
-	var amq = new amq();
+	
 	
 	amq.init({ 
     	uri: "http://localhost:8161/api/amq", 
