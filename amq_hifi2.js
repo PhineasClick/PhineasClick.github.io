@@ -16,8 +16,7 @@ Amq = function() {
 	var sessionInitializedCallback;
 	var messageHandlers = {};
 	var connectStatusHandler;
-	var pollErrorDelay = 5;
-	var waitForPoll = -1.0;
+	var pollErrorDelay = 5000;
 
 	
 	function ajax(uri, options) {
@@ -200,7 +199,7 @@ Amq = function() {
 	that.init = function(options) {
 			print("AMQ initializing");
 			connectStatusHandler = options.connectStatusHandler || function(connected){};
-			pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 0;
+			pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 5000;
 			timeout = typeof options.timeout == 'number' ? options.timeout : 25;
 			sessionInitializedCallback = options.sessionInitializedCallback
 			print("Send Poll...");
@@ -252,7 +251,7 @@ Amq = function() {
 	
 	amq.init({ 
     	uri: "http://localhost:8161/api/amq", 
-    	pollDelay : 20,
+    	pollDelay : 10000,
     	logging: true,
     	timeout: 20
   	});
