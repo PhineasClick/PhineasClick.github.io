@@ -143,9 +143,6 @@ Amq = function() {
 		
 		//Read and format the Data as JSON Object.
 		
-		var response = data.getElementsByTagName("ajax-response");
-		
-		print("message Handler extracted : " + response);
 		
 		
 	}
