@@ -202,7 +202,8 @@ Amq = function() {
 			connectStatusHandler = options.connectStatusHandler || function(connected){};
 			pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 5000;
 			timeout = typeof options.timeout == 'number' ? options.timeout : 25;
-			sessionInitializedCallback = options.sessionInitializedCallback
+			sessionInitializedCallback = options.sessionInitializedCallback;
+			uri = options.uri;
 			print("Send Poll...");
 			sendPoll();
 	};
