@@ -230,13 +230,13 @@ Amq = function() {
 	that.addListener = function(id, destination, handler, options) {
 			messageHandlers[id] = handler;
 			var headers = options && options.selector ? {selector:options.selector} : null;
-			sendJmsMessage(destination, id, 'listen', headers);
+			that.sendJmsMessage(destination, id, 'listen', headers);
 	};
 
 	// remove Listener from channel or topic.
 	that.removeListener = function(id, destination) {
 			messageHandlers[id] = null;
-			sendJmsMessage(destination, id, 'unlisten');
+			that.sendJmsMessage(destination, id, 'unlisten');
 	};
 
 	that.cleanup = function() {
