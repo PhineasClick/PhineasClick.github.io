@@ -10,9 +10,9 @@
         
         var id = this.properties.id.replace(/[{}]/g, '');
         
-        print("UserData : " + properties.userData;
+        print("UserData : " + properties.userData);
         
-        print("Entity Properties : " + JSON.stringify(properties);
+        print("Entity Properties : " + JSON.stringify(properties));
            
     };
 
