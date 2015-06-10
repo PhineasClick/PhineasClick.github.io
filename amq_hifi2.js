@@ -156,7 +156,7 @@ Amq = function() {
 			throw(e);
 		} finally {
 			print("PollDelay : " + pollDelay);
-			Script.setTimeout(sendPoll.call(), pollDelay);
+			Script.setTimeout(sendPoll, pollDelay);
 		}
 	}
 
@@ -173,12 +173,12 @@ Amq = function() {
 		connectStatusHandler(false);
 		if (status === 'error' && xhr.status === 0) {
 			print('Server connection dropped.');
-			Script.setTimeout(function() { sendPoll(); }, pollErrorDelay);
+			Script.setTimeout(sendPoll, pollErrorDelay);
 			return;
 		}
 		print('Error occurred in poll. HTTP result: ' +
 		                         xhr.status + ', status: ' + status);
-		Script.setTimeout(function() { sendPoll(); }, pollErrorDelay);
+		Script.setTimeout(sendPoll, pollErrorDelay);
 	}
 	
 	function sendPoll() {
