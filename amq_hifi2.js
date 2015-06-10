@@ -1,5 +1,5 @@
 
-amq = function() {
+Amq = function() {
 
 
 	var that = {};
@@ -248,7 +248,7 @@ amq = function() {
 
 (function(){
 
-	
+	var amq = Amq();
 	
 	amq.init({ 
     	uri: "http://localhost:8161/api/amq", 
