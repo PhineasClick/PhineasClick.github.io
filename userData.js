@@ -10,8 +10,6 @@
         
         print("Entity Properties : " + JSON.stringify(properties));
         
-        var id = properties.id.replace(/[{}]/g, '');
-        
         print("UserData : " + properties.userData);
         
            
