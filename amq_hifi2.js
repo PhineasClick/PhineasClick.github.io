@@ -155,6 +155,7 @@ Amq = function() {
 			print('Exception in the poll handler: ' + data + " : " + e);
 			throw(e);
 		} finally {
+			print("PollDelay : " + pollDelay);
 			Script.setTimeout(sendPoll.call(), pollDelay);
 		}
 	}
