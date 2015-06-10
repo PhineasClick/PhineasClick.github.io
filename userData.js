@@ -8,7 +8,7 @@
         }
         var properties = Entities.getEntityProperties(this.entityID);
         
-        var id = this.properties.id.replace(/[{}]/g, '');
+        var id = properties.id.replace(/[{}]/g, '');
         
         print("UserData : " + properties.userData);
         
