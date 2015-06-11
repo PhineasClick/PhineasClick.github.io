@@ -17,7 +17,7 @@ Amq = function() {
 	var messageHandlers = {};
 	var connectStatusHandler;
 	var pollErrorDelay = 5000;
-
+	var clientId = null;
 	
 	function ajax(uri, options) {
 		
@@ -78,8 +78,6 @@ Amq = function() {
 
 	}
 		
-
-	
 	function buildParams(msgs) {
 		var s = [];
 		for (var i = 0, c = msgs.length; i < c; i++) {
@@ -95,6 +93,19 @@ Amq = function() {
 			s[s.length] = msgs[i].messageType;
 		}
 		return s.join('');
+	}
+	
+	
+	// add clientId to data if it exists, before passing data to ajax connection adapter.
+	function addClientId( data ) {
+		var output = data || '';
+		if( clientId ) {
+			if( output.length > 0 ) {
+				output += '&';
+			}
+			output += 'clientId='+clientId;
+		}
+		return output;
 	}
 	
 	function errorHandler(xhr, status, ex) {
@@ -195,7 +206,7 @@ Amq = function() {
 		var successCallback = sessionInitialized ? pollHandler : initHandler;
 
 		var options = { method: 'GET',
-			data: data,
+			data: addClientId( data ),
 			success: successCallback,
 			error: pollErrorHandler};
 		ajax(uri, options);
@@ -207,6 +218,7 @@ Amq = function() {
 			pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 5000;
 			timeout = typeof options.timeout == 'number' ? options.timeout : 25;
 			sessionInitializedCallback = options.sessionInitializedCallback;
+			clientId = options.clientId;
 			uri = options.uri;
 			print("Send Poll...");
 			sendPoll();
@@ -224,7 +236,7 @@ Amq = function() {
 		} else {
 			batchInProgress = true;
 			ajax(uri, { method: 'post',
-				data: buildParams( [message] ) ,
+				data: addClientId( buildParams( [message] ) ),
 				error: errorHandler,
 				headers: headers,
 				success: endBatch});
@@ -253,12 +265,19 @@ Amq = function() {
 
 (function(){
 
+
+	this.entityID = null;
+    this.properties = null;
+
 	var amq = new Amq();
+	
+	var clientID = this.properties.id;
 	
 	amq.init({ 
     	uri: "http://localhost:8161/api/amq", 
     	pollDelay : 10000,
     	logging: true,
+    	clientID : clientID,
     	timeout: 20
   	});
 	
@@ -276,6 +295,12 @@ Amq = function() {
         amq.sendJmsMessage("topic://HIFI.MS","{test:1}",'send');  
     }; 
 	
+	this.preload = function(entityID) {
+		 if (this.entityID === null || !this.entityID.isKnownID) {
+            this.entityID = Entities.identifyEntity(entityID);
+        }
+        this.properties = Entities.getEntityProperties(this.entityID);
+	}
 	Script.scriptEnding.connect(amq.cleanup);
 	
 })
