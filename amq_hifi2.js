@@ -268,10 +268,17 @@ Amq = function() {
 
 	this.entityID = null;
     this.properties = null;
+    this.clientID = null;
 
 	var amq = new Amq();
 	
-	var clientID = this.properties.id;
+	this.preload = function(entityID) {
+		 if (this.entityID === null || !this.entityID.isKnownID) {
+            this.entityID = Entities.identifyEntity(entityID);
+        }
+        this.properties = Entities.getEntityProperties(this.entityID);
+        this.clientID = this.properties.id;
+	}
 	
 	amq.init({ 
     	uri: "http://localhost:8161/api/amq", 
@@ -295,12 +302,7 @@ Amq = function() {
         amq.sendJmsMessage("topic://HIFI.MS","{test:1}",'send');  
     }; 
 	
-	this.preload = function(entityID) {
-		 if (this.entityID === null || !this.entityID.isKnownID) {
-            this.entityID = Entities.identifyEntity(entityID);
-        }
-        this.properties = Entities.getEntityProperties(this.entityID);
-	}
+	
 	Script.scriptEnding.connect(amq.cleanup);
 	
 })
