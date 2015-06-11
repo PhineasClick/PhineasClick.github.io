@@ -214,6 +214,7 @@ Amq = function() {
 
 	that.init = function(options) {
 			print("AMQ initializing");
+			print("Options : " + options);
 			connectStatusHandler = options.connectStatusHandler || function(connected){};
 			pollDelay = typeof options.pollDelay == 'number' ? options.pollDelay : 5000;
 			timeout = typeof options.timeout == 'number' ? options.timeout : 25;
@@ -288,7 +289,7 @@ Amq = function() {
     	logging: true,
     	clientID : this.clientID,
     	timeout: 20,
-    	polling: false
+    	polling: true
   	});
 	
 	var myHandler = {
