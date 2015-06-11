@@ -273,8 +273,8 @@ Amq = function() {
 	var amq = new Amq();
 	
 	this.preload = function(entityID) {
-		 if (this.entityID === null || !this.entityID.isKnownID) {
-            this.entityID = Entities.identifyEntity(entityID);
+		if (!this.entityID) {
+            this.entityID = entityID;
         }
         this.properties = Entities.getEntityProperties(this.entityID);
         this.clientID = this.properties.id;
