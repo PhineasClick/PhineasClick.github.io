@@ -3,7 +3,7 @@
     this.clickReleaseOnEntity = function(entityID, mouseEvent) { 
     	print("event entityID : " + entityID);
     	print("this entityID : " + this.entityID);
-        if (this.entityID === null) {
+        if (this.entityID === null || this.entityID === 'undefined') {
             this.entityID = entityID;
         }
         

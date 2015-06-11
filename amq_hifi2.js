@@ -46,6 +46,9 @@ Amq = function() {
 		}
 		
 		print("Request sent : " + req.readyState);
+		
+		print("DEBUG : " + JSON.stringify(req));
+		
 		if(req.readyState == req.DONE) {
 			
 			print("HttpStatus  : " + req.status);
