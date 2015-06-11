@@ -220,8 +220,10 @@ Amq = function() {
 			sessionInitializedCallback = options.sessionInitializedCallback;
 			clientId = options.clientId;
 			uri = options.uri;
-			print("Send Poll...");
-			sendPoll();
+			if(options.polling) {
+				print("Send Poll...");
+				sendPoll();
+			}
 	};
 
 	that.sendJmsMessage = function(destination, message, type, headers) {
@@ -285,13 +287,14 @@ Amq = function() {
     	pollDelay : 10000,
     	logging: true,
     	clientID : this.clientID,
-    	timeout: 20
+    	timeout: 20,
+    	polling: true
   	});
 	
 	var myHandler = {
   		rcvMessage: function(message)
   		{
-     		print("received " + message);
+     		print("myHandler received " + message);
   		}
 	};
  

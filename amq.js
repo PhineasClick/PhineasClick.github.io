@@ -315,8 +315,9 @@ Amq = function() {
 			sessionInitializedCallback = options.sessionInitializedCallback
 			clientId = options.clientId;
 			adapter.init(options);
-			sendPoll();
-			
+			if(options.polling) {
+				sendPoll();
+			}
 	};
 		    
 	that.startBatch : function() {
