@@ -284,7 +284,7 @@ Amq = function() {
     	uri: "http://localhost:8161/api/amq", 
     	pollDelay : 10000,
     	logging: true,
-    	clientID : clientID,
+    	clientID : this.clientID,
     	timeout: 20
   	});
 	
