@@ -288,7 +288,7 @@ Amq = function() {
     	logging: true,
     	clientID : this.clientID,
     	timeout: 20,
-    	polling: true
+    	polling: false
   	});
 	
 	var myHandler = {
