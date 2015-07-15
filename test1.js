@@ -1,5 +1,5 @@
 
 test1 = function() {
-	var that = {};
+	var that = {test:"test"};
 	return that;
 }

@@ -8,7 +8,7 @@
     	eval(xhr.responseText)
   	};
     
-    Script.$include("");
+    Script.$include("http://phineasclick.github.io/test1.js");
     
     print("test finished");
 })
