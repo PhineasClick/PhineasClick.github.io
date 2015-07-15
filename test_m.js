@@ -9,6 +9,6 @@
   	};
     
     Script.$include("http://phineasclick.github.io/test1.js");
-    
-    print("test finished");
+    t = new test1();
+    print("test finished" + : test1.test);
 })
