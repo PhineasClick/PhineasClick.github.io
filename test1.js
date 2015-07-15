@@ -1,8 +1,9 @@
 
 test1 = function() {
-	var that = {test:"test"};
-	sayTest = function() {
-		print("TEST.......");
+	var that = {
+		sayTest : function() {
+			print("TEST.......");
+		}
 	}
 	return that;
 }
